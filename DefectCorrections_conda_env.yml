@@ -1,4 +1,4 @@
-name: coffee
+name: DefectCorrections
 channels:
   - defaults
 dependencies:
