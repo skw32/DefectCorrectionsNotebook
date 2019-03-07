@@ -3,7 +3,7 @@
 from NotebookScripter import run_notebook
 import os
 
-############## USER INPUTS ##############
+############## USER INPUTS START BELOW HERE ##############
 
 # Define directory containing all defects data
 base_dir = "/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/EnargiteDefects/fromLandau/Results/data/final_one_shots"
@@ -20,8 +20,8 @@ global_configuration = {
     "manual_cutoff": None
 }
 # Dictionary storing location of data for each charged defect to be analysed
-# Dictionary key defines name of directory output data will be stored in for each defect
-# Location of neutral defect data, charged defect data and defect charge state must be inputted for each defect that is to be processed
+# Dictionary key defines: name of directory output data will be stored in for each defect and then
+# location of neutral defect data, charged defect data and defect charge state must be inputted for each defect that is to be processed
 defect_dataset = {
     "V-S_q=+1_sg=1": [
         # neutral_dir, charge_dir, charge_state

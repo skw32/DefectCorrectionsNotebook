@@ -56,7 +56,7 @@ def write_CoFFEE_in_file(defect_outputs_dir, super_x, super_y, super_z, geom_fil
     coffee_in.write("Total_charge = "+str(defect_charge)+"\n")
     coffee_in.write("Sigma = "+str(sigma)+"\n")
     # Centre of Gaussian is set as defect location
-    coffee_in.write("Centre_a1 = "+str(defect_x/a1_tot)+"\n") # CHECK THIS IS CORRECT! (in crystal units?!)
+    coffee_in.write("Centre_a1 = "+str(defect_x/a1_tot)+"\n")
     coffee_in.write("Centre_a2 = "+str(defect_y/a2_tot)+"\n")
     coffee_in.write("Centre_a3 = "+str(defect_z/a3_tot)+"\n")
     coffee_in.write("/\n")
