@@ -15,7 +15,7 @@ Other components of this project include:
 - WorkflowTests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
 
 ## Installation instructions 
-This information is contained within the notebook (DefectCorrectionsNotebook.ipynb) but it repeated here for completeness.
+First download a copy of the repository, all analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but it repeated here for completeness.
 
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
 
@@ -26,7 +26,7 @@ To use this workflow you must then activate this conda environment with
 `conda activate YourChosenEnvName`
 
 ## License
-**To add** + refer to use of CoFFEE which has a BSD 3-clause license
+**To add** + refer to use of CoFFEE which has a BSD 3-clause license??
 
 ## Code contributions
 Contributions to extend the functionality of this workflow are very much welcomed! For this, we welcome contributors to fork their own copy of this repository for local developments before submitting a pull request to merge with this repository. See [here](https://guides.github.com/activities/forking/) for more details on this procedure.
