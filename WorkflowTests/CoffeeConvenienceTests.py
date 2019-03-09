@@ -1,0 +1,1 @@
+# Add functions for tests to ensure input files written are compatible with CoFFEE??

@@ -1,21 +1,32 @@
-import logging, logging.config
+import logging
+# import logging.config
 
 def configure_logging(logfile_path):
     '''
-    Initialize logging defaults for 'log.info' file written to store metadata during analysis of each defect
+    Initialize logging defaults for in-notebook messages and 'log.info' file written to store intermediate results during analysis of each defect
     '''
 
-    default_formatter = logging.Formatter("[%(asctime)s] [%(levelname)s] [%(name)s] [%(funcName)s():%(lineno)s] %(message)s")
-    root_logger = logging.getLogger()
+    # Set default format for each line of log messages within notebook
+    notebook_formatter = logging.Formatter("[%(levelname)s] [Cell line num: %(lineno)s] %(message)s")
+    # Set default format for each line in log.info file
+ #   info_file_formatter = logging.Formatter("[%(levelname)s] [Notebook cell num: %(???)s] [Cell line num: %(lineno)s] %(message)s")
+
+    # Initialise log.info for defect processing information
+    defect_logger = logging.getLogger()
+    # For log.info file
     info_file_handler = logging.FileHandler(logfile_path + ".info", mode='w')
     info_file_handler.setLevel(logging.INFO)
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(default_formatter)
-    list(map(root_logger.removeHandler, root_logger.handlers[:]))
-    list(map(root_logger.removeFilter, root_logger.filters[:]))
-    root_logger.setLevel(logging.INFO)
-    root_logger.addHandler(info_file_handler)
-    root_logger.addHandler(console_handler)
+#    info_file_handler.setFormatter(info_file_formatter)
+    # For messages within notebook
+    notebook_handler = logging.StreamHandler()
+    notebook_handler.setLevel(logging.INFO)
+    notebook_handler.setFormatter(notebook_formatter)
 
-    return root_logger
+    # Remove default handlers and add custom ones (for log.info file and messages in notebooks)
+    list(map(defect_logger.removeHandler, defect_logger.handlers[:]))
+    list(map(defect_logger.removeFilter, defect_logger.filters[:]))
+    defect_logger.setLevel(logging.INFO)
+    defect_logger.addHandler(info_file_handler)
+    defect_logger.addHandler(notebook_handler)
+
+    return defect_logger
