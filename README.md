@@ -22,6 +22,8 @@ Other components of this project include:
 ## Installation instructions 
 First download a copy of the repository, all analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but it repeated here for completeness.
 
+The package used for applying the correction scheme in this workflow (CoFFEE) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158).
+
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
 
 `conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml` 
