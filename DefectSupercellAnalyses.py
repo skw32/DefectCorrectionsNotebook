@@ -87,7 +87,7 @@ def count_species(host_coords, defect_coords):
     Read through species in atom_coords[row][3] for host and defect supercells
     First function output is a list of all different species present in the host supercell
     Next two outputs are the number of each of these species in the host and defect supercell, in the same order
-    Assumption is made that only intrinsic defects are present, hence same species are present in host and defect supercells
+    Assumption is made that only intrinsic defects are present, hence same atom types are present in host and defect supercells
     '''
     # Obtain list of all species contained in host supercell
     species = []

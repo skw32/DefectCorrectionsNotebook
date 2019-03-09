@@ -28,6 +28,9 @@ To use this workflow you must then activate this conda environment with
 ## License
 **To add** + refer to use of CoFFEE which has a BSD 3-clause license??
 
+## Relevant citations
+Methods used in this workflow are taken from a number of publications and so these should be cited when making use of this workflow. These include doi: 10.1103/PhysRevLett.102.016402, doi: 10.1016/j.cpc.2018.01.011 and doi: 10.1103/PhysRevB.89.195205.
+
 ## Code contributions
 Contributions to extend the functionality of this workflow are very much welcomed! For this, we welcome contributors to fork their own copy of this repository for local developments before submitting a pull request to merge with this repository. See [here](https://guides.github.com/activities/forking/) for more details on this procedure.
 
