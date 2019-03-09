@@ -18,8 +18,11 @@ Other components of this project include:
 This information is contained within the notebook (DefectCorrectionsNotebook.ipynb) but it repeated here for completeness.
 
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
+
 `conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml` 
+
 To use this workflow you must then activate this conda environment with 
+
 `conda activate YourChosenEnvName`
 
 ## License
