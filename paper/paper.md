@@ -45,7 +45,7 @@ There are other existing workflows developed for performing finite-size correcti
 
 
 # Defect processing example
-The example below shows a visualisation generated with the VESTA (cite) software package for a supercell of ??? containing a ??? point defect (a) along with selected outputs from the notebook workflow, including plots of the defect coordinates located by the workflow (b) and alignment of the potentials of the defect and perfect host supercell (c).
+The example below shows a visualisation generated with the VESTA software package [@Momma2011] for a supercell of ??? containing a ??? point defect (a) along with selected outputs from the notebook workflow, including plots of the defect coordinates located by the workflow (b) and alignment of the potentials of the defect and perfect host supercell (c).
 
 **Show VESTA visual of defect supercell, then supercell location plot from notebook and final potential alignment plot? GaAs vacancy?**
 
