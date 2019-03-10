@@ -1,7 +1,6 @@
 ** UNDER CONSTRUCTION **
 
 To-do: 
-- Add zenodo doi?? 
 - Add license file
 - Add tests to WorkflowTests and hook up to Travis-CI
 
