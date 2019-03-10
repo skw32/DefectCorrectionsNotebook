@@ -37,14 +37,15 @@ JOSS guidelines:
 
 
 # Summary
-This workflow is designed to combine the benefits of step-by-step explanation and transparency of processing steps of a jupyter notebook with scriptability to allow for a convenient, automated application of finite-size corrections to a set of periodic electronic structure calculations for supercells containing charged point defects. 
+This workflow has been designed to combine the benefits of step-by-step explanation and transparency of processing steps of a jupyter notebook with scriptability to allow for a convenient, automated application of finite-size corrections to a set of periodic electronic structure calculations for supercells containing charged point defects. This workflow has been developed to be compatible with outputs from the all-electron electronic structure software package FHI-aims (cite).
 - Highlight importance of defects for determining the performance of various devices (cite)
 - Brief overview of first principles calculations of defects and finite-size errors for charged defects when using the supercell method with periodic DFT for use of well-established electronic structure software packages (see thesis - briefly mention iic, pa and bf corrections) + refer to literature for further reading (doi: 10.1103/RevModPhys.86.253)
+- Highlight scalability of FHI-aims (cite) and importance of large defect supercells in many cases
 
 
 Paragraph2:
-- This python workflow enables the use of the FNV post-processing scheme (doi: 10.1103/PhysRevLett.102.016402) to apply finite-size corrections to charged defect supercells when performing periodic electronic structure calculations with the all-electron electronic structure software package FHI-aims (cite). Highlight scalability of FHI-aims (cite) and importance of large defect supercells in many cases.
-- Mention that there are other existing workflows developed to perform such corrections to outputs from other electronic structure softwares (cite pylada, pycdt, coffee) and that this workflow makes use of components of the CoFFEE python code (doi: 10.1016/j.cpc.2018.01.011), which was developed for outputs of the quantumESPRESSO software package (cite).
+- This python workflow enables the use of the FNV post-processing scheme (doi: 10.1103/PhysRevLett.102.016402) to apply finite-size corrections to charged defect supercells when performing periodic electronic structure calculations with FHI-aims. 
+- Mention that there are other existing workflows developed to perform finite-size correction schemes to outputs from other electronic structure softwares (cite pylada, pycdt, coffee) and that this workflow makes use of components of the CoFFEE python code (doi: 10.1016/j.cpc.2018.01.011), which was developed for outputs of the quantumESPRESSO software package (cite).
 - The potential alignment step (towards the end of the workflow) uses averaged atom-site potentials with the sampling region proposed by Kumagai and Oba (doi: 10.1103/PhysRevB.89.195205), see Fig. 2(a) in the publication. Currently, band filling corrections (most relevant for shallow defects with delocalised defect-induced charge) are not available in this workflow, only image-charge interaction and potential alignment corrections are applied. The addition of band filling corrections would be an example of a possible extension of this project.
 
 
