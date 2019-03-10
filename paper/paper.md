@@ -1,5 +1,5 @@
 ---
-title: 'DefectCorrectionsNotebook: Post-processing workflow for the application of finite-size corrections to periodic electronic structure calculations of charged defect supercells performed with the FHI-aims software package'
+title: 'DefectCorrectionsNotebook: Post-processing workflow for finite-size corrections to FHI-aims periodic electronic structure calculations of charged defect supercells'
 tags:
   - python3
   - point defects
