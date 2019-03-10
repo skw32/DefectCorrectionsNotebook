@@ -10,13 +10,13 @@ tags:
   - finite-size correction
 authors:
   - name: Suzanne K. Wallace
-    orcid: 
+    orcid: 0000-0003-4925-4768
     affiliation: "1,2"
   - name: Tong Zhu
     orcid: 
     affiliation: 3
   - name: Volker Blum
-    orcid:
+    orcid: 0000-0001-8660-7230
     affiliation: 3
 affiliations:
  - name: Department of Chemistry, Centre for Sustainable Chemical Technologies, University of Bath, Claverton Down, Bath, BA2 7AY, UK
