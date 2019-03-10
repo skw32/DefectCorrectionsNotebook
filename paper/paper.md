@@ -15,6 +15,9 @@ authors:
   - name: Tong Zhu
     orcid: 
     affiliation: 3
+  - name: Aron Walsh
+    orcid: 0000-0001-5460-7033
+    affiliation: "2,4"
   - name: Volker Blum
     orcid: 0000-0001-8660-7230
     affiliation: 3
@@ -25,6 +28,8 @@ affiliations:
    index: 2
  - name: Department of Mechanical Engineering and Materials Science, Duke University, Durham, North Carolina 27708, USA
    index: 3
+ - name: Department of Materials Science and Engineering, Yonsei University, Seoul 03722, Korea
+ - index: 4
 date: 10 March 2019
 bibliography: paper.bib
 ---
