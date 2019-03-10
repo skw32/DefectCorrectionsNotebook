@@ -15,14 +15,14 @@ This project contains a workflow which aims to allow for convenient and explanat
 
 Other components of this project include:
 - DefectSupercellAnalysis.py: This contains functions used in the notebook workflow that were  written for reading in structural information of defect supercells in the geometry file format of FHI-aims ('geometry.in').
-- CoffeeConvenienceFunctions.py: This contains functions used in the notebook workflow for easy integration with the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) software package for performing processing steps to charged defect supercells.
+- CoffeeConvenienceFunctions.py: This contains functions used in the notebook workflow to automatically generate input files for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) software package for performing processing steps to charged defect supercells.
 - LogFileSetup.py: This file contains the default format of the log file used to store intermediate processing results from the notebook.
 - WorkflowTests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
 
 ## Installation instructions 
-First download a copy of the repository, all analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but it repeated here for completeness.
+First download a copy of the repository, all analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but is repeated here for completeness.
 
-The package used for applying the correction scheme in this workflow (CoFFEE) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158).
+The package used for applying the correction scheme in this workflow (CoFFEE version 1.1) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158).
 
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
 
@@ -50,7 +50,7 @@ For any queries or bugs to report, please contact suzywallace501@gmail.com
 
 ## Acknowledgements
 - Volker Blum (Duke University)
-- Nathaniel Cohen for support in the development of this workflow and integration with the [NotebookScripter](https://github.com/breathe/NotebookScripter) library
+- Nathaniel Cohen for support in the development of this workflow and for the [NotebookScripter](https://github.com/breathe/NotebookScripter) library
 - Extensive use has been made of the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) software package for implementing finite-size corrections to defect supercells
 - Many useful discussions on defect correction techniques were provided by [Stephan Lany, Anuj Goyal and Prashun Gorai](https://github.com/pylada/pylada-defects) (NREL)
 
