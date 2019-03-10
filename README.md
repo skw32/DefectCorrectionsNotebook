@@ -3,6 +3,7 @@
 To-do: 
 - Add license file
 - Add tests to WorkflowTests and hook up to Travis-CI
+- Finish writing paper.md
 
 # DefectCorrectionsNotebook: Overview
 
