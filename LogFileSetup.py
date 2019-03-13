@@ -1,5 +1,4 @@
 import logging
-# import logging.config
 
 def configure_logging(logfile_path):
     '''
@@ -8,7 +7,7 @@ def configure_logging(logfile_path):
 
     # Set default format for each line of log messages within notebook
     notebook_formatter = logging.Formatter("[%(levelname)s] [Cell line num: %(lineno)s] %(message)s")
-    # Set default format for each line in log.info file
+    # Set default format for each line in log.info file (look into methods to outputt cell num, not just line num in cell)
  #   info_file_formatter = logging.Formatter("[%(levelname)s] [Notebook cell num: %(???)s] [Cell line num: %(lineno)s] %(message)s")
 
     # Initialise log.info for defect processing information
