@@ -8,7 +8,7 @@
 
 
 import re
-from ??/CoffeeConvenienceFunctions import *
+from ??/CoffeeConvenienceFunctions import * # Look into best way of loading functions from main dir
 
 
 

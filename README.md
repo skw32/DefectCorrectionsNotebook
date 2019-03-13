@@ -1,8 +1,7 @@
 ** UNDER CONSTRUCTION **
 
 To-do: 
-- Add license file
-- Add tests to WorkflowTests and hook up to Travis-CI
+- Finish WorkflowTests and hook up to Travis-CI
 - Finish writing paper.md
 
 # DefectCorrectionsNotebook: Overview
@@ -33,13 +32,13 @@ To use this workflow you must then activate this conda environment with
 `conda activate YourChosenEnvName`
 
 ## License
-**To add** + refer to use of CoFFEE which has a BSD 3-clause license??
+This software has been made available under a 3-Clause BSD License.
 
 ## Code contributions
 Contributions to extend the functionality of this workflow are very much welcomed! For this, we welcome contributors to fork their own copy of this repository for local developments before submitting a pull request to merge with this repository. See [here](https://guides.github.com/activities/forking/) for more details on this procedure.
 
 ## Relevant citations
-Methods used in this workflow are taken from a number of publications and so these should be cited when making use of this workflow. These include doi: 10.1103/PhysRevLett.102.016402, doi: 10.1016/j.cpc.2018.01.011 and doi: 10.1103/PhysRevB.89.195205.
+Methods used in this workflow are taken from a number of publications and so these should be cited when making use of this workflow. These include doi: 10.1088/0965-0393/17/8/084002, doi: 10.1103/PhysRevLett.102.016402, doi: 10.1016/j.cpc.2018.01.011 and doi: 10.1103/PhysRevB.89.195205.
 
 ## Authors
 - Suzanne K. Wallace

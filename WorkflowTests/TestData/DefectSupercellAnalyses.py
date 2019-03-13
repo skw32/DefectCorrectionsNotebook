@@ -250,7 +250,7 @@ def antisite_coords(host_coords, defect_coords):
     for i in range (0, len(defect_coords)):
         if (defect_coords[i][3] == species_in):
             defect_in_coords.append(defect_coords[i][:3]) 
-    # Find closest antisite_in species in host supercell for each one in defect supercell
+    # Find closest interstitial species in host supercell for each one in defect supercell
     all_closest_species = []
     for x_defect, y_defect, z_defect in defect_in_coords:
         # USE np.argmin??
