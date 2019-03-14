@@ -190,8 +190,8 @@ def vacancy_coords(host_coords, defect_coords):
                 closest_species = [x_defect, y_defect, z_defect]
         all_closest_species.append(closest_species + [min_distance])
     # Find which species in host where the 'closest distance' to a species in the defect supercell is largest
-    # This is identified as the vacancy in te host supercell
-    x_vac, y_vac, z_vac = host_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+    # This is identified as the vacancy in the host supercell
+    x_vac, y_vac, z_vac = host_vac_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     # Above in one-liner version of code commented out below
     #max_dist = 0
     #for i in range(0, len(all_closest_species)):
@@ -230,7 +230,7 @@ def interstitial_coords(host_coords, defect_coords):
         all_closest_species.append(closest_species + [min_distance])
     # Find which species in defect where the 'closest distance' to a species in the host supercell is largest
     # This is identified as the interstitial in the defect supercell
-    x_int, y_int, z_int = defect_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+    x_int, y_int, z_int = defect_int_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     return species_int, x_int, y_int, z_int
 
 
@@ -244,13 +244,13 @@ def antisite_coords(host_coords, defect_coords):
     host_in_coords = []
     for i in range (0, len(host_coords)):
         if (host_coords[i][3] == species_in):
-            host_in_coords.append(host_coords[i][:3])
+            host_in_coords.append(host_coords[i][:3]) 
     # Read in coordinates of antisite_in species in defect supercell
     defect_in_coords = []
     for i in range (0, len(defect_coords)):
         if (defect_coords[i][3] == species_in):
-            defect_in_coords.append(defect_coords[i][:3]) 
-    # Find closest interstitial species in host supercell for each one in defect supercell
+            defect_in_coords.append(defect_coords[i][:3])  
+    # Find closest antisite_in species in host supercell for each one in defect supercell
     all_closest_species = []
     for x_defect, y_defect, z_defect in defect_in_coords:
         # USE np.argmin??
@@ -260,11 +260,11 @@ def antisite_coords(host_coords, defect_coords):
             distance_to_defect = sqrt( (abs(x_host-x_defect)*abs(x_host-x_defect)) + (abs(y_host-y_defect)*abs(y_host-y_defect)) + (abs(z_host-z_defect)*abs(z_host-z_defect)))
             if min_distance is None or distance_to_defect < min_distance:
                 min_distance = distance_to_defect
-                closest_species = [x_host, y_host, z_host]
+                closest_species = [x_defect, y_defect, z_defect]
         all_closest_species.append(closest_species + [min_distance])
     # Find which species in defect where the 'closest distance' to a species in the perfect supercell is largest
     # This is identified as the species added into in the defect supercell
-    x_in, y_in, z_in = defect_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+    x_in, y_in, z_in = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     return species_in, species_out, x_in, y_in, z_in
 
 
