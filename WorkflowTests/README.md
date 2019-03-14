@@ -9,6 +9,3 @@ The different test scripts include:
 
 
 The 'TestData' directory contains sample FHI-aims structure files (geometry.in) for a perfect supercell of Cu3AsS4 and defect supercells: S vacancy, Cu interstitial, As-on-Cu antisite, all with a +1 charge state.
-
-
-The 'ProcessedDefects' directory just contains some outputs from tests.
