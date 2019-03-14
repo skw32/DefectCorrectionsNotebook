@@ -1,8 +1,9 @@
 ** UNDER CONSTRUCTION **
 
 To-do: 
-- Finish WorkflowTests and hook up to Travis-CI
+- Finish WorkflowTests and hook up to Travis-CI or circle-CI??
 - Finish writing paper.md
+- Add tests for newer potential alignment steps + compare workflow results to defects processed by hand
 
 # DefectCorrectionsNotebook: Overview
 
