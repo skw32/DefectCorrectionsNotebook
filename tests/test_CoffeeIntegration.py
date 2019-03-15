@@ -6,7 +6,7 @@
 ## Write dummy 'in' coffee input files that is expected to run very quickly and compare to expected result 
 ### def check_basic_solver, assert 
 
-
+'''
 import re
 from ??/CoffeeConvenienceFunctions import * # Look into best way of loading functions from main dir
 
@@ -26,6 +26,7 @@ def test_coffee_solver:
     # Run coffee Poission solver with test system (for quick convergence)
     run_CoFFEE_solver(path_to_coffee_dir, defect_outputs_dir, super_x, super_y, super_z, defect_geom, sigma, cutoff, defect_charge, defect_x, defect_y, defect_z, dielectric_xx, dielectric_yy, dielectric_zz)
 
+    # CHECK FOR NO ERROR MESSAGES!
     try:
         with open(coffee_solver_output), 'r') as f:
             for line in f:
@@ -39,3 +40,4 @@ def test_coffee_solver:
 
     assert  E_q_per_m < expectedOutput+0.1 and E_q_per_m > expectedOutput+0.1
 
+'''

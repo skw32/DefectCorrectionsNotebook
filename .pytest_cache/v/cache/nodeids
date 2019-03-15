@@ -1,0 +1,3 @@
+[
+  "tests/test_DataReadIn.py::test_get_supercell_dimensions"
+]

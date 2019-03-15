@@ -11,4 +11,17 @@
 
 # -----------------------------------------------------------------------------------------------------------
 
-# Decide how to import custom functions from main dir???
+import DefectSupercellAnalyses as dsa
+import pytest
+
+#def test_test():
+#    dummy_value = dsa.get_supercell_dimensions("WorkflowTests/TestData/vacancy/geometry.in")
+#    assert dummy_value == 10
+
+# Unit tests for functions
+
+# Testing functions that use other functions
+def test_get_supercell_dimensions():
+    dims_test = dsa.get_supercell_dimensions("tests/TestData/vacancy/geometry.in")
+    dims_verified = [14.8588928, 12.9147523, 12.33466882]
+    assert dims_test == pytest.approx(dims_verified)

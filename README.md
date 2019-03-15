@@ -17,7 +17,7 @@ Other components of this project include:
 - DefectSupercellAnalysis.py: This contains functions used in the notebook workflow that were  written for reading in structural information of defect supercells in the geometry file format of FHI-aims ('geometry.in').
 - CoffeeConvenienceFunctions.py: This contains functions used in the notebook workflow to automatically generate input files for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) software package for performing processing steps for applying corrections to charged defect supercells.
 - LogFileSetup.py: This file contains the default format of the log file used to store intermediate processing results from the notebook.
-- WorkflowTests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
+- tests: This directory contains tests for functions written for this workflow and sample data to use with the tests and conftest.py is a configuration file for pytest to define the root directory for the testsuite.
 
 ## Installation instructions 
 First download a copy of the repository. All analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but is repeated here for completeness.
