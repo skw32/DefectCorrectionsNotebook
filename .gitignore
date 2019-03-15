@@ -5,3 +5,5 @@ plavg_a3.plot
 rho_r.npy
 __pycache__
 .ipynb_checkpoints
+.vscode
+.pytest_cache

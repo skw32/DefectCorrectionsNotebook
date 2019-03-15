@@ -1,9 +1,0 @@
-{
-    "python.pythonPath": "/Users/suzannewallace/anaconda3/envs/coffee/bin/python",
-    "python.unitTest.pyTestArgs": [
-        "."
-    ],
-    "python.unitTest.unittestEnabled": false,
-    "python.unitTest.nosetestsEnabled": false,
-    "python.unitTest.pyTestEnabled": true
-}
