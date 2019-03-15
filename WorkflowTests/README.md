@@ -1,4 +1,4 @@
-**To-do: hook up with Travis-CI or circle-CI??**
+**To-do: hook up with Travis-CI or circle-CI?? and link tests to functions in main dir**
 
 Tests in this directory can be run with `pytest ChoosenScriptName.py`
 
