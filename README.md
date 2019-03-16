@@ -22,8 +22,6 @@ Other components of this project include:
 ## Installation instructions 
 First download a copy of the repository. All analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but is repeated here for completeness.
 
-The package used for applying the correction scheme in this workflow (CoFFEE version 1.1) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158).
-
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
 
 `conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml` 
@@ -31,6 +29,10 @@ This workflow uses python3. The most convenient way to setup the python environm
 To use this workflow you must then activate this conda environment with 
 
 `conda activate YourChosenEnvName`
+
+The package used for applying the FNV correction scheme in this workflow (CoFFEE version 1.1) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158). To install this, go to the downloaded CoFFEE folder and run 
+
+`python setup.py build_ext -b PoissonSolver/`
 
 ## License
 This software has been made available under a 3-Clause BSD License.

@@ -1,4 +1,4 @@
-**To-do: hook up with Travis-CI or circle-CI?? and link tests to functions in main dir**
+**To-do: hook up with Travis-CI or circle-CI??**
 
 Tests in this directory can be run with `pytest` from the top level directory of this repository.
 
