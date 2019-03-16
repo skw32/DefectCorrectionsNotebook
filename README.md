@@ -30,7 +30,7 @@ To use this workflow you must then activate this conda environment with
 
 `conda activate YourChosenEnvName`
 
-The package used for applying the FNV correction scheme in this workflow (CoFFEE version 1.1) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158). To install this, go to the downloaded CoFFEE folder and run 
+The package used for applying the FNV correction scheme in this workflow (CoFFEE version 1.1) can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158). All dependencies required for this version of CoFFEE were contained in the conda environment above and instructions in the CoFFEE README just required the user to go to the downloaded CoFFEE folder and run 
 
 `python setup.py build_ext -b PoissonSolver/`
 
