@@ -1,6 +1,9 @@
 import numpy as np
 import re
 from math import sqrt
+import logging
+logger = logging.getLogger()
+
 
 def read_lattice_vectors(geom_file):
     '''
