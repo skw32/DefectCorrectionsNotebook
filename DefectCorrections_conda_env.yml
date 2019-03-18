@@ -5,6 +5,7 @@ channels:
 dependencies:
   - coffee_poisson_solver=1.1=py36h39e3cac_0
   - appnope=0.1.0=py36hf537a9a_0
+  - atomicwrites=1.3.0=py_0
   - attrs=19.1.0=py_0
   - backcall=0.1.0=py36_0
   - blas=1.0=mkl
@@ -52,6 +53,7 @@ dependencies:
   - mkl=2019.1=144
   - mkl_fft=1.0.10=py36h5e564d8_0
   - mkl_random=1.0.2=py36h27c97d8_0
+  - more-itertools=6.0.0=py36_0
   - mpc=1.1.0=h6ef4df4_1
   - mpfr=4.0.1=h3018a27_3
   - mpi4py=2.0.0=py36_0
@@ -73,13 +75,16 @@ dependencies:
   - pexpect=4.6.0=py36_0
   - pickleshare=0.7.5=py36_0
   - pip=19.0.3=py36_0
+  - pluggy=0.9.0=py36_0
   - prometheus_client=0.6.0=py36_0
   - prompt_toolkit=2.0.9=py36_0
   - ptyprocess=0.6.0=py36_0
+  - py=1.8.0=py36_0
   - pygments=2.3.1=py36_0
   - pyparsing=2.3.1=py36_0
   - pyqt=5.9.2=py36h655552a_2
   - pyrsistent=0.14.11=py36h1de35cc_0
+  - pytest=4.3.0=py36_0
   - python=3.6.8=haf84260_0
   - python-dateutil=2.8.0=py36_0
   - pytz=2018.9=py36_0

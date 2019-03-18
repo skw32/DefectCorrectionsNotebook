@@ -42,6 +42,8 @@ Alternatively, a conda environment can be created for this workflow and the nece
 
 `pip install NotebookScripter`
 
+`conda install pytest`
+
 `conda activate YourChosenEnvName`
 
 ## License
