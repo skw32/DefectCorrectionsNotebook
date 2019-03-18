@@ -1,0 +1,4 @@
+[run]
+omit = 
+       coffee.py
+       conftest.py

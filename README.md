@@ -44,6 +44,8 @@ Alternatively, a conda environment can be created for this workflow and the nece
 
 `conda install pytest`
 
+`conda install pytest-cov`
+
 `conda activate YourChosenEnvName`
 
 ## License
