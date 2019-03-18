@@ -4,9 +4,10 @@
 ** UNDER CONSTRUCTION **
 
 To-do: 
-- Finish tests and hook up to Travis-CI or circle-CI??
+- Finish writing tests for current workflow
 - Finish writing paper.md (with sample outputs)
-- Add tests for newer potential alignment steps + compare workflow results to Tong's defects processed by hand
+- Add tests for newer potential alignment steps and LZ Ecor
+- Compare workflow results to Tong's defects processed by hand
 
 # DefectCorrectionsNotebook: Overview
 
@@ -42,17 +43,13 @@ Alternatively, a conda environment can be created for this workflow and the nece
 
 `conda create -n chooseYourEnvName python=3`
 
+`conda activate YourChosenEnvName`
+
 `conda install -c breathe coffee_poisson_solver`
 
-`pip install NotebookScripter`
+`conda install jupyter pytest pytest-cov`
 
-`conda install pytest`
-
-`conda install pytest-cov`
-
-`pip install coveralls`
-
-`conda activate YourChosenEnvName`
+`pip install NotebookScripter coveralls`
 
 ## License
 This software has been made available under a 3-Clause BSD License.

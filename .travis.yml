@@ -13,10 +13,8 @@ install:
   - conda update -q conda
 script:
   - conda install -c breathe coffee_poisson_solver
-  - pip install NotebookScripter
-  - conda install pytest
-  - conda install pytest-cov
-  - pip install coveralls
+  - conda install pytest pytest-cov
+  - pip install NotebookScripter coveralls
   - pytest --cov-config .coveragerc --cov=. tests/
 after_success:
   - coveralls

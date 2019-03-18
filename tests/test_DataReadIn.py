@@ -1,5 +1,10 @@
 import DefectSupercellAnalyses as dsa
+import LogFileSetup as lfs
 import pytest
+
+# Test log file function call
+def test_log_file_config():
+    lfs.configure_logging("log_test")
 
 # Unit tests for functions
 def test_read_lattice_vectors():

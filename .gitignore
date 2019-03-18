@@ -7,3 +7,5 @@ __pycache__
 .ipynb_checkpoints
 .vscode
 .pytest_cache
+log_test.info
+.coverage
