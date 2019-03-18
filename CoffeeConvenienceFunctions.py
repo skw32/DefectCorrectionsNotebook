@@ -2,12 +2,12 @@ import subprocess
 import os
 from DefectSupercellAnalyses import *
 
-def run_CoFFEE_solver(path_to_coffee_dir, defect_outputs_dir, super_x, super_y, super_z, defect_geom, sigma, cutoff, defect_charge, defect_x, defect_y, defect_z, dielectric_xx, dielectric_yy, dielectric_zz):
+def run_CoFFEE_solver(coffee_exe, defect_outputs_dir, super_x, super_y, super_z, defect_geom, sigma, cutoff, defect_charge, defect_x, defect_y, defect_z, dielectric_xx, dielectric_yy, dielectric_zz):
     write_CoFFEE_in_file(defect_outputs_dir, super_x, super_y, super_z, defect_geom, sigma, cutoff, defect_charge, defect_x, defect_y, defect_z, dielectric_xx, dielectric_yy, dielectric_zz)
     # Run CoFFEE Poisson solver to obtain E_q^per,m
     # Use subprocess.check_output to ensure coffee.py finishes running before notebook is allowed to proceed
     try:
-        subprocess.check_output(str(os.path.join(path_to_coffee_dir, "coffee.py"))+" "+str(os.path.join(defect_outputs_dir,"cm_"+str(super_x)+"x"+str(super_y)+"x"+str(super_z)+"_in"))+" > "+str(os.path.join(defect_outputs_dir,"cm_"+str(super_x)+"x"+str(super_y)+"x"+str(super_z)+".out")), shell=True, stderr=subprocess.STDOUT)
+        subprocess.check_output(str(os.path.join(os.path.dirname(__file__), coffee_exe))+" "+str(os.path.join(defect_outputs_dir,"cm_"+str(super_x)+"x"+str(super_y)+"x"+str(super_z)+"_in"))+" > "+str(os.path.join(defect_outputs_dir,"cm_"+str(super_x)+"x"+str(super_y)+"x"+str(super_z)+".out")), shell=True, stderr=subprocess.STDOUT)
     except Exception as err:
         logger.info(err.output)
 
