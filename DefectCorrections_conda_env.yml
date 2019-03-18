@@ -114,7 +114,13 @@ dependencies:
   - zeromq=4.3.1=h0a44026_3
   - zlib=1.2.11=h1de35cc_3
   - pip:
+    - chardet==3.0.4
+    - idna==2.8
     - notebookscripter==3.2.0
     - poissonsolver==0.0.0
+    - python-coveralls==2.9.1
+    - pyyaml==5.1
+    - requests==2.21.0
+    - urllib3==1.24.1
 prefix: /Users/suzannewallace/anaconda3/envs/DefectCorrectionsEnv
 

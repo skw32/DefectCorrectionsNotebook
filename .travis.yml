@@ -17,3 +17,5 @@ script:
   - conda install pytest
   - conda install pytest-cov
   - pytest --cov-config .coveragerc --cov=. tests/
+after_success:
+  - coveralls
