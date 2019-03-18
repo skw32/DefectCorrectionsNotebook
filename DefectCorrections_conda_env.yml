@@ -115,6 +115,8 @@ dependencies:
   - zlib=1.2.11=h1de35cc_3
   - pip:
     - chardet==3.0.4
+    - coveralls==1.6.0
+    - docopt==0.6.2
     - idna==2.8
     - notebookscripter==3.2.0
     - poissonsolver==0.0.0

@@ -16,6 +16,7 @@ script:
   - pip install NotebookScripter
   - conda install pytest
   - conda install pytest-cov
+  - pip install coveralls
   - pytest --cov-config .coveragerc --cov=. tests/
 after_success:
   - coveralls
