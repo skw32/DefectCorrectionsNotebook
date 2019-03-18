@@ -32,7 +32,7 @@ To use this workflow you must then activate this conda environment with
 
 `conda activate YourChosenEnvName`
 
-The package used for applying the FNV correction scheme in this workflow (CoFFEE version 1.1). It can be downloaded from [here], but all dependencies required for using this version of CoFFEE were contained in the conda environment above and the main executable for (coffee.py) has been included in this git repository.
+The package used for applying the FNV correction scheme in this workflow (CoFFEE version 1.1). It can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158), but all dependencies required for using this version of CoFFEE were contained in the conda environment above and the main executable for (coffee.py) has been included in this git repository.
 
 Alternatively, a conda environment can be created for this workflow and the necessary packages installed one at a time, as outlined below
 
