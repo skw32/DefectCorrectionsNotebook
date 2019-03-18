@@ -1,4 +1,7 @@
 # Build and upload conda package via travis: adapted from this gist: https://gist.github.com/zshaheen/fe76d1507839ed6fbfbccef6b9c13ed9
+language: python
+python:
+  -  '3.6.8'
 os:
   - linux
 install:
@@ -16,4 +19,4 @@ script:
   - pip install NotebookScripter
   - conda install pytest
   - conda install pytest-cov
-  - pytest --cov=. tests/
+  - pytest --cov-config .coveragerc --cov=. tests/

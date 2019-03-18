@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/skw32/DefectCorrectionsNotebook.svg?branch=master)](https://travis-ci.org/skw32/DefectCorrectionsNotebook)
+[![Coverage Status](https://coveralls.io/repos/github/skw32/DefectCorrectionsNotebook/badge.svg?branch=master)](https://coveralls.io/github/skw32/DefectCorrectionsNotebook?branch=master)
+
 ** UNDER CONSTRUCTION **
 
 To-do: 
@@ -20,6 +23,7 @@ Other components of this project include:
 - coffee.py: This is the main executable for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) package (from version 1.1) that is used in this workflow.
 - tests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
 - conftest.py is a configuration file for pytest to define the root directory for the testsuite.
+- .travis.yml and .coveragerc are files required for Travis-CI and test coverage respectively.
 
 ## Installation instructions 
 First download a copy of the repository. All analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but is repeated here for completeness.
