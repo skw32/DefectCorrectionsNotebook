@@ -12,7 +12,6 @@ global_configuration = {
     "dielectric_xx": 7.49,
     "dielectric_yy": 6.92,
     "dielectric_zz": 7.19,
-    "path_to_coffee_dir": '/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/CoFFEE_1.1',
     "path_to_all_defects": base_dir,
     "path_to_host": '/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/EnargiteDefects/fromLandau/Results/data/final_one_shots/PerfectReference',
     "charge_model_file": 'charge_model.dat',
@@ -107,7 +106,6 @@ defect_dataset = {
         # neutral_dir, charge_dir, charge_state
         "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup6", "AntisiteSupercells/As-Cu/charged/+4/DefectSpacegroup6", 4
     ],
-
     "Cu_As_q=-1_sg=6": [
         # neutral_dir, charge_dir, charge_state
         "AntisiteSupercells/Cu-As/neutral/DefectSpacegroup6", "AntisiteSupercells/Cu-As/charged/-1/DefectSpacegroup6", -1
