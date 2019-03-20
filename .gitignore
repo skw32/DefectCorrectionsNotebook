@@ -9,3 +9,4 @@ __pycache__
 .pytest_cache
 log_test.info
 .coverage
+coffee_solver_test.out
