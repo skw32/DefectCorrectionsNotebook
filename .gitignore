@@ -1,8 +1,6 @@
 ProcessedDefects
 V_r.npy
 in_V
-cm_2x2x2.out
-cm_2x2x2_in
 plavg_a3.plot
 rho_r.npy
 __pycache__
@@ -11,3 +9,4 @@ __pycache__
 .pytest_cache
 log_test.info
 .coverage
+.DS_store

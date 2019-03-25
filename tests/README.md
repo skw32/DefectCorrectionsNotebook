@@ -1,4 +1,4 @@
-Tests in this directory can be run with `pytest` from the top level directory of this repository, or with `pytest --cov-config .coveragerc --cov=. tests/` for a test coverage information.
+Tests in this directory can be run with `pytest` from the top level directory of this repository, or, with `pytest --cov-config .coveragerc --cov=. tests/` for test coverage information.
 
 The different test scripts include:
 - test_DataReadIn.py: this script contains tests for functions in 'DefectSupercellAnalyses.py' in the previous directory which check that data from FHI-aims structure files is being read in as expected using sample data contained in the 'TestData' directory and also tests that the function used to configure the log file written to during the notebook workflow is being called without error.

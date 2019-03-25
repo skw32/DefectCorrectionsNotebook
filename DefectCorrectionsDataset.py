@@ -1,4 +1,10 @@
-# Script must be run from command line as 'ipython DefectCorrectionsDataset.py'
+'''
+This script has been written to allow DefectCorrectionsNotebook.ipynb to be run for a set of defect structures
+The user needs to add inputs from the 'User inputs' cell that was in the notebook file
+Below that, the user must then add in a list of the different defects and locations of the data to be processed
+
+Run the script from command line using 'ipython DefectCorrectionsDataset.py'
+'''
 
 from NotebookScripter import run_notebook
 import os
