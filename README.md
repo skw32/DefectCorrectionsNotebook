@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/skw32/DefectCorrectionsNotebook.svg?branch=master)](https://travis-ci.org/skw32/DefectCorrectionsNotebook)
-[![Coverage Status](https://coveralls.io/repos/github/skw32/DefectCorrectionsNotebook/badge.svg?branch=master)](https://coveralls.io/github/skw32/DefectCorrectionsNotebook?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/skw32/DefectCorrectionsNotebook/badge.png?branch=master)](https://coveralls.io/github/skw32/DefectCorrectionsNotebook?branch=master)
 
 ** UNDER CONSTRUCTION **
 
