@@ -1,10 +1,10 @@
 [![Build Status](https://travis-ci.org/skw32/DefectCorrectionsNotebook.svg?branch=master)](https://travis-ci.org/skw32/DefectCorrectionsNotebook)
-[![Coverage Status](https://coveralls.io/repos/github/skw32/DefectCorrectionsNotebook/badge.svg?branch=master)](https://coveralls.io/github/skw32/DefectCorrectionsNotebook?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/skw32/DefectCorrectionsNotebook/badge.png?branch=master)](https://coveralls.io/github/skw32/DefectCorrectionsNotebook?branch=master)
 
 ** UNDER CONSTRUCTION **
 
 To-do: 
-- Finish writing tests for current workflow
+- Add new FNV alignment step, option for LZ Ecor and final KO pa step
 - Finish writing paper.md (with sample outputs)
 - Add tests for newer potential alignment steps and LZ Ecor
 - Compare workflow results to Tong's defects processed by hand
