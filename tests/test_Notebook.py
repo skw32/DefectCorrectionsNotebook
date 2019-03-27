@@ -44,8 +44,8 @@ def test_notebook():
         # make sure required inputs exists
         path_to_defect = os.path.join(base_dir, charge_dir)
         path_to_neutral = os.path.join(base_dir, neutral_dir)  
-        assert os.path.exists(path_to_defect), 'required input directory is missing {0}'.format(path_to_defect)
-        assert os.path.exists(path_to_neutral), 'required input directory is missing {0}'.format(path_to_neutral)
+        assert os.path.isdir(path_to_defect), 'required input directory is missing {0}'.format(path_to_defect)
+        assert os.path.isdir(path_to_neutral), 'required input directory is missing {0}'.format(path_to_neutral)
         config = {
             "defect_outputs_dir": name,
             "path_to_defect": path_to_defect,
