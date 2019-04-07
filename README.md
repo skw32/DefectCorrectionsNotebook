@@ -68,8 +68,8 @@ Methods used in this workflow are taken from a number of publications and so the
 
 ## Authors
 
-- Suzanne K. Wallace
 - Tong Zhu
+- Suzanne K. Wallace
 
 ## Contact
 
