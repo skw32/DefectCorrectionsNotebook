@@ -32,15 +32,19 @@ Other components of this project include:
 
 First download a copy of the repository. All analysis should be performed from the directory containing the notebook file (DefectCorrectionsNotebook.ipynb). The following information is also contained within the notebook, but is repeated here for completeness.
 
-This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created from the DefectCorrections_conda_env.yml file using conda with
+This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). 
 
-`conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml`
 
-To use this workflow you must then activate this conda environment with
+### Option 1: Create conda env directly from .yml file
+All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
+
+`conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml` 
+
+To use this workflow you must then activate this conda environment with 
 
 `conda activate YourChosenEnvName`
 
-The package used for applying the FNV correction scheme in this workflow (CoFFEE version 1.1). It can be downloaded from [here](https://www.sciencedirect.com/science/article/pii/S0010465518300158), but all dependencies required for using this version of CoFFEE were contained in the conda environment above and the main executable for (coffee.py) has been included in this git repository.
+### Option 2: Create conda env manually
 
 Alternatively, a conda environment can be created for this workflow and the necessary packages installed one at a time, as outlined below
 
