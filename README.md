@@ -52,7 +52,7 @@ Alternatively, a conda environment can be created for this workflow and the nece
 
 `conda activate YourChosenEnvName`
 
-`conda install -c breathe coffee_poisson_solver`
+`conda install -c suzannekwallace coffee_poisson_solver_ko`
 
 `conda install jupyter pytest pytest-cov`
 
