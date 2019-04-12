@@ -10,3 +10,7 @@ __pycache__
 log_test.info
 .coverage
 .DS_store
+G1.npy
+G2.npy
+G3.npy
+V_G-model.npy

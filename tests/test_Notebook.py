@@ -56,7 +56,7 @@ def test_notebook():
     # Use NotebookScripter to run notebook for each charged defect in turn
     for config in configurations:
         try:
-          notebook_test = run_notebook_in_process("./DefectCorrectionsNotebook.ipynb", **global_configuration, **config, return_values=["E_q_lat"])
+          notebook_test = run_notebook_in_process("./DefectCorrectionsNotebook.ipynb", **global_configuration, **config)("E_q_lat")
         except Exception as err:
             print("Caught error when executing notebook: {0}".format(err))
         

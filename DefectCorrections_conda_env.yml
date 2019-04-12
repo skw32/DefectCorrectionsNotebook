@@ -1,4 +1,4 @@
-name: DefectCorrectionsEnv_KO
+name: DefectCorrectionsEnv_ko
 channels:
   - suzannekwallace
   - defaults
@@ -11,7 +11,7 @@ dependencies:
   - bleach=3.1.0=py36_0
   - ca-certificates=2019.1.23=0
   - certifi=2019.3.9=py36_0
-  - coffee_poisson_solver_ko=1.1=py36h39e3cac_0
+  - coffee_poisson_solver_ko=1.1=py36h39e3cac_30
   - coverage=4.5.3=py36h1de35cc_0
   - cycler=0.10.0=py36hfc81398_0
   - dbus=1.13.6=h90a0687_0
@@ -32,7 +32,7 @@ dependencies:
   - ipython_genutils=0.2.0=py36h241746c_0
   - ipywidgets=7.4.2=py36_0
   - jedi=0.13.3=py36_0
-  - jinja2=2.10=py36_0
+  - jinja2=2.10.1=py36_0
   - jpeg=9b=he5867d9_2
   - jsonschema=3.0.1=py36_0
   - jupyter=1.0.0=py36_7
@@ -80,10 +80,10 @@ dependencies:
   - ptyprocess=0.6.0=py36_0
   - py=1.8.0=py36_0
   - pygments=2.3.1=py36_0
-  - pyparsing=2.3.1=py36_0
+  - pyparsing=2.4.0=py_0
   - pyqt=5.9.2=py36h655552a_2
   - pyrsistent=0.14.11=py36h1de35cc_0
-  - pytest=4.3.1=py36_0
+  - pytest=4.4.0=py36_1
   - pytest-cov=2.6.1=py36_0
   - python=3.6.8=haf84260_0
   - python-dateutil=2.8.0=py36_0
@@ -94,7 +94,7 @@ dependencies:
   - readline=7.0=h1de35cc_5
   - scipy=1.2.1=py36h1410ff5_0
   - send2trash=1.5.0=py36_0
-  - setuptools=40.8.0=py36_0
+  - setuptools=41.0.0=py36_0
   - sip=4.19.8=py36h0a44026_0
   - six=1.12.0=py36_0
   - sqlite=3.27.2=ha441bb4_0
@@ -116,8 +116,8 @@ dependencies:
     - coveralls==1.7.0
     - docopt==0.6.2
     - idna==2.8
-    - notebookscripter==4.0.1
+    - notebookscripter==5.0.0
     - requests==2.21.0
     - urllib3==1.24.1
-prefix: /Users/suzannewallace/anaconda3/envs/DefectCorrectionsEnv_KO
+prefix: /Users/suzannewallace/anaconda3/envs/DefectCorrectionsEnv_ko
 
