@@ -22,7 +22,8 @@ from scipy import optimize
 #import matplotlib.colors
 import numpy as np
 #from scipy.optimize import curve_fit
-from APA_script.atomic_V import atomic_3d   # Suzy edits: added APA_script path for calling from top dir with notebook
+#from APA_script.atomic_V import atomic_3d   # Suzy edits: added APA_script path for calling from top dir with notebook
+from PoissonSolver import atomic_3d   # Suzy edits: after updating coffee_poisson_solver_ko conda pkg
 
 import os
 import sys
@@ -193,6 +194,8 @@ def compute_atomic_pot(atom_no,defect_line,grid,latvec,host_corr,V_G,beta,G1,G2,
     
 
 
+''' Suzy edits: move below into notebook using notebook params as args
+
 
 #main 
 beta = float(sys.argv[1]) # Suzy edits: replace with sigma parameter from notebook?
@@ -219,6 +222,8 @@ result = compute_atomic_pot(atom_no,defect_line,grid,lattice_vec,host_corr,model
 result[:,1] = -1.0*result[:,1] 
 #print result
 np.savetxt('atom_potential_model',result)
+
+'''
 
 
 

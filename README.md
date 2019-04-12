@@ -26,6 +26,7 @@ Other components of this project include:
 - LogFileSetup.py: This file contains the default format of the log file used to store intermediate processing results from the notebook.
 - coffee.py: This is the main executable for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) package (from version 1.1) that is used in this workflow.
 - tests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
+- sample_data contains some sample defect data for running the notebook. 
 - conftest.py is a configuration file for pytest to define the root directory for the testsuite.
 - .travis.yml and .coveragerc are files required for Travis-CI and test coverage respectively.
 
