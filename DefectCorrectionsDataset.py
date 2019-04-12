@@ -22,7 +22,11 @@ global_configuration = {
     "path_to_host": '/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/EnargiteDefects/fromLandau/Results/data/final_one_shots/PerfectReference',
     "charge_model_file": 'charge_model.dat',
     "pa_plot_file": 'pa_plot.png',
-    "manual_cutoff": None
+    "manual_cutoff": None,
+    "LZ": True,
+    "FNV": True,
+    "atom_centered_pa": True,
+    "planar_av_pa": True
 }
 # Dictionary storing location of data for each charged defect to be analysed
 # Dictionary key defines: name of directory output data will be stored in for each defect and then
