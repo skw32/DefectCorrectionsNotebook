@@ -5,6 +5,19 @@ import logging
 logger = logging.getLogger()
 
 
+# TO-DO: add test for pytest for this function
+def count_atoms(geom_file):
+    atom_num = 0
+    try:
+        with open(geom_file, 'r') as f:
+            for line in f:
+                if re.search('atom', line):
+                    atom_num += 1
+    except IOError:
+        logger.info("Could not open "+str(geom_file))
+    return atom_num
+
+
 def read_lattice_vectors(geom_file):
     '''
     Input crystal geometry file in format for FHI-aims (geometry.in)
@@ -63,7 +76,6 @@ def read_atom_coords(geom_file):
     except IOError:
         logger.info("Could not open "+str(geom_file))
     return atom_coords
-
 
 def find_defect_type(host_coords, defect_coords):
     '''

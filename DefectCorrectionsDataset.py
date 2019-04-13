@@ -20,8 +20,6 @@ global_configuration = {
     "dielectric_zz": 7.19,
     "path_to_all_defects": base_dir,
     "path_to_host": '/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/EnargiteDefects/fromLandau/Results/data/final_one_shots/PerfectReference',
-    "charge_model_file": 'charge_model.dat',
-    "pa_plot_file": 'pa_plot.png',
     "manual_cutoff": None,
     "LZ": True,
     "FNV": True,
@@ -163,3 +161,4 @@ for config in configurations:
 
 print("FINISHED")
 print("Outputs for all defects processed can be found in directories ProcessedDefects/: "+ ", ".join(defect_dataset.keys()) )
+print("See log.info files in each subdirectory for an overview of the analysis and corrections_summary.dat for final correction terms.")
