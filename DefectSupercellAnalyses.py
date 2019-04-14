@@ -6,7 +6,51 @@ logger = logging.getLogger()
 
 
 # TO-DO: add test for pytest for this function
+def coords_to_array(coord_list):
+    '''
+    Takes list of atomic coordinates outputted from 'read_atom_coords' function
+    Returns only the coordinates (not species type) as a numpy array
+    '''
+    coords_array = np.zeros([len(coord_list),3])
+    for i in range(len(coord_list)):
+        coords_array[i][0], coords_array[i][1], coords_array[i][2] = coord_list[i][0], coord_list[i][1], coord_list[i][2]
+    return coords_array
+
+
+# TO-DO: add test for pytest for this function
+# Also check ordering in array is compatible with Tong's geo_compare function in APA_script/main.py
+def lattice_vectors_array(geom_file):
+    '''
+    Input crystal geometry file in format for FHI-aims (geometry.in)
+    Function searches for lattice vectors using string 'lattice_vector'
+    Returns each component of the lattice vectors as elements of a 3x3 numpy array
+    '''
+    latt_vec_array = np.zeros([3,3])
+    try:
+        with open(geom_file, 'r') as f:
+            i = 0
+            for line in f:
+                if re.search('lattice_vector', line):
+                    words = line.split()
+                    latt_vec_array[i][0] = float(words[1])
+                    latt_vec_array[i][1] = float(words[2])
+                    latt_vec_array[i][2] = float(words[3])
+                    i += 1
+                    if line == None:
+                        logger.info('Warning! - No lattice vectors found in '+str(geom_file))
+    except IOError:
+        logger.info("Could not open "+str(geom_file))      
+    return latt_vec_array
+
+
+# TO-DO: add test for pytest for this function
 def count_atoms(geom_file):
+    '''
+    Input crystal geometry file in format for FHI-aims (geometry.in)
+    Counts number of lines in file starting with 'atom' to allow for use of 'atom' or 'atom_frac'
+    Outputs number of atoms identified in file
+    N.B. It is important lines containing atom coordinates have not been commented out to create the defect.
+    '''
     atom_num = 0
     try:
         with open(geom_file, 'r') as f:
@@ -180,6 +224,7 @@ def find_antisite(host_coords, defect_coords):
 def vacancy_coords(host_coords, defect_coords):
     '''
     Define vacancy coordinates in perfect host supercell
+    defect_line for a vacancy is defined as the line number in the perfect host supercell of the atom missing in the vacancy supercell
     '''
     species_vac = find_vacancy(host_coords, defect_coords)  
     # Read in coordinates of vacancy species in perfect host supercell
@@ -195,7 +240,6 @@ def vacancy_coords(host_coords, defect_coords):
     # Find closest vacancy species in defect supercell for each one in host supercell
     all_closest_species = []
     for x_host, y_host, z_host in host_vac_coords:
-        # USE np.argmin??
         closest_species = None
         min_distance = None
         for x_defect, y_defect, z_defect in defect_vac_coords:
@@ -212,13 +256,17 @@ def vacancy_coords(host_coords, defect_coords):
     #for i in range(0, len(all_closest_species)):
     #    if (all_closest_species[i][3] > max_dist):
     #        x_vac, y_vac, z_vac = host_coords[i][:3]
-    #        max_dist = all_closest_species[i][3] 
-    return species_vac, x_vac, y_vac, z_vac
+    #        max_dist = all_closest_species[i][3]
+    for i in range (0, len(host_coords)):
+        if (host_coords[i][0:3] == x_vac, y_vac, z_vac):
+            defect_line = i
+    return species_vac, x_vac, y_vac, z_vac, defect_line
 
 
 def interstitial_coords(host_coords, defect_coords):
     '''
     Define interstitial coordinates in defect supercell
+    defect_line for an interstitial is defined as the line number in the defect supercell of the atom not present in the host supercell
     '''
     species_int = find_interstitial(host_coords, defect_coords)  
     # Read in coordinates of interstitial species in perfect host supercell
@@ -234,7 +282,6 @@ def interstitial_coords(host_coords, defect_coords):
     # Find closest interstitial species in host supercell for each one in defect supercell
     all_closest_species = []
     for x_defect, y_defect, z_defect in defect_int_coords:
-        # USE np.argmin??
         closest_species = None
         min_distance = None
         for x_host, y_host, z_host in host_int_coords:
@@ -246,12 +293,16 @@ def interstitial_coords(host_coords, defect_coords):
     # Find which species in defect where the 'closest distance' to a species in the host supercell is largest
     # This is identified as the interstitial in the defect supercell
     x_int, y_int, z_int = defect_int_coords[np.argmax([i[3] for i in all_closest_species])][:3]
-    return species_int, x_int, y_int, z_int
+    for i in range (0, len(defect_coords)):
+        if (defect_coords[i][0:3] == x_int, y_int, z_int):
+            defect_line = i
+    return species_int, x_int, y_int, z_int, defect_line
 
 
 def antisite_coords(host_coords, defect_coords):
     '''
     Define antisite coordinates in defect supercell
+    defect_line for an antisite is defined as the line number in the defect supercell of the atom not present in the host supercell
     '''
     species_in, species_out = find_antisite(host_coords, defect_coords)
     # Find species_in in defect supercell mostly using function for finding interstitial
@@ -268,7 +319,6 @@ def antisite_coords(host_coords, defect_coords):
     # Find closest antisite_in species in host supercell for each one in defect supercell
     all_closest_species = []
     for x_defect, y_defect, z_defect in defect_in_coords:
-        # USE np.argmin??
         closest_species = None
         min_distance = None
         for x_host, y_host, z_host in host_in_coords:
@@ -280,7 +330,10 @@ def antisite_coords(host_coords, defect_coords):
     # Find which species in defect where the 'closest distance' to a species in the perfect supercell is largest
     # This is identified as the species added into in the defect supercell
     x_in, y_in, z_in = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
-    return species_in, species_out, x_in, y_in, z_in
+    for i in range (0, len(defect_coords)):
+        if (defect_coords[i][0:3] == x_in, y_in, z_in):
+            defect_line = i
+    return species_in, species_out, x_in, y_in, z_in, defect_line
 
 
 def defect_to_boundary(x_defect, y_defect, z_defect, supercell_x, supercell_y, supercell_z):

@@ -26,7 +26,7 @@ import csv
 
 ### Suzy edits: Update these to take notebook params/ use dsa functions instead
 defect_info, charge, shift_H, shift_D = ptt.sys_basic('system.in') # Suzy edits: replace this with notebook parameters??
-atom_no,defect_no = geo_basic('geometry-host.in','geometry-defect.in')  
+atom_no,defect_no = geo_basic('geometry-host.in','geometry-defect.in')  # Suzy edits: replace with dsa function
 #print "atom_No, Defect_No, defect_line:", atom_no, defect_no 
 defect_line,lattice_vec, host_corr = geo_compare(atom_no,defect_no,'geometry-host.in','geometry-defect.in')
 result = apa.atomic_pot_fhiaims_plot(atom_no,defect_no,defect_line,lattice_vec,host_corr,'pot-host.out','pot-defect.out',shift_H,shift_D)

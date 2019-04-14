@@ -1,20 +1,6 @@
 import numpy as np
 import sys, string
 
-# Functions for Tong's APA plotting script ----------------------------------------------------------------------------------
-
-# For reading system.in for generating plot - may be redundant if using notebook parameters instead??
-def sys_basic(inputfile): 
-    info = open(inputfile,'r')
-    res = info.readline().split()
-    defect_info = res
-    res = info.readline()
-    charge = float(res)
-    res = info.readline()
-    shift_H = float(res)
-    res = info.readline()
-    shift_D = float(res)
-    return defect_info,charge, shift_H, shift_D
 
 # Functions from Tong's plotting scripts -----------------------------------------------------------------------------------
 
