@@ -87,7 +87,7 @@ def test_defect_to_boundary():
     verified_defect_dist = (5.58437198, 4.348602379999999, 6.124612839999999)
     host_coords = dsa.read_atom_coords("tests/TestData/perfect/geometry.in")
     defect_coords = dsa.read_atom_coords("tests/TestData/antisite/geometry.in")
-    species_in, species_out, defect_x, defect_y, defect_z = dsa.antisite_coords(host_coords, defect_coords)
+    species_in, species_out, defect_x, defect_y, defect_z, defect_line = dsa.antisite_coords(host_coords, defect_coords)
     supercell_dims = dsa.get_supercell_dimensions("tests/TestData/perfect/geometry.in")
     test_defect_dist = dsa.defect_to_boundary(defect_x, defect_y, defect_z, supercell_dims[0], supercell_dims[1], supercell_dims[2])
     assert verified_defect_dist == pytest.approx(test_defect_dist)
