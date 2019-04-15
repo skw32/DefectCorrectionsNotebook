@@ -12,10 +12,7 @@ import logging
 import re
 logger = logging.getLogger()
 
-'''
-re search match start of line and take final number? e.g.
-#Numerical average free-atom electrostatic potential in [eV]:   -14.39796374
-'''
+
 def read_free_atom_pot(planar_pot_file):
     '''
     Reads free atom potential from top line of 'plane_average_realspace_ESP.out' FHI-aims output file

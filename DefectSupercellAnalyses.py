@@ -5,20 +5,7 @@ import logging
 logger = logging.getLogger()
 
 
-# TO-DO: add test for pytest for this function
-def coords_to_array(coord_list):
-    '''
-    Takes list of atomic coordinates outputted from 'read_atom_coords' function
-    Returns only the coordinates (not species type) as a numpy array
-    '''
-    coords_array = np.zeros([len(coord_list),3])
-    for i in range(len(coord_list)):
-        coords_array[i][0], coords_array[i][1], coords_array[i][2] = coord_list[i][0], coord_list[i][1], coord_list[i][2]
-    return coords_array
-
-
-# TO-DO: add test for pytest for this function
-# Also check ordering in array is compatible with Tong's geo_compare function in APA_script/main.py
+# **Check ordering in array is compatible with Tong's geo_compare function in APA_script/main.py**
 def lattice_vectors_array(geom_file):
     '''
     Input crystal geometry file in format for FHI-aims (geometry.in)
@@ -41,6 +28,17 @@ def lattice_vectors_array(geom_file):
     except IOError:
         logger.info("Could not open "+str(geom_file))      
     return latt_vec_array
+
+
+def coords_to_array(coord_list):
+    '''
+    Takes list of atomic coordinates outputted from 'read_atom_coords' function
+    Returns only the coordinates (not species type) as a numpy array
+    '''
+    coords_array = np.zeros([len(coord_list),3])
+    for i in range(len(coord_list)):
+        coords_array[i][0], coords_array[i][1], coords_array[i][2] = coord_list[i][0], coord_list[i][1], coord_list[i][2]
+    return coords_array
 
 
 # TO-DO: add test for pytest for this function
