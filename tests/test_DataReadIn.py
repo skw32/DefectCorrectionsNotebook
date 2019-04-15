@@ -26,6 +26,10 @@ def test_lattice_vectors_array():
     latt_vec_array_test = dsa.lattice_vectors_array("tests/TestData/perfect/geometry.in")
     latt_vec_array_verified = np.array([[1.48588928e+01, -9.37860000e-04, -6.44980000e-04], [4.60260000e-04, 1.29147523e+01, -1.08640000e-03], [-1.05560000e-04, -2.17860000e-04, 1.23346688e+01]])
     assert latt_vec_array_test == pytest.approx(latt_vec_array_verified)
+def test_count_atoms():
+    count_verified = 128
+    count_test = dsa.count_atoms("tests/TestData/perfect/geometry.in")
+    assert count_verified == count_test
 
 # Testing functions that use other functions
 def test_coords_to_array():

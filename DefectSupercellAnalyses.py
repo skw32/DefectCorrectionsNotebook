@@ -5,7 +5,6 @@ import logging
 logger = logging.getLogger()
 
 
-# **Check ordering in array is compatible with Tong's geo_compare function in APA_script/main.py**
 def lattice_vectors_array(geom_file):
     '''
     Input crystal geometry file in format for FHI-aims (geometry.in)
@@ -41,7 +40,6 @@ def coords_to_array(coord_list):
     return coords_array
 
 
-# TO-DO: add test for pytest for this function
 def count_atoms(geom_file):
     '''
     Input crystal geometry file in format for FHI-aims (geometry.in)
