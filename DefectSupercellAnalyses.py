@@ -101,6 +101,7 @@ def read_atom_coords(geom_file):
     '''
     Input crystal geometry file in format for FHI-aims (geometry.in)
     Function searches for atom using string 'atom' to allow for either 'atom' or 'atom_frac' in the file format
+    If coordinates are fractional, these are converted to Cartesian coordinates
     Returns list of lists for all atom coordinates where atom_coords[row][col]
     Columns are: x, y, z, species
     '''
@@ -110,12 +111,19 @@ def read_atom_coords(geom_file):
             for line in f:
                 if re.search('atom', line):
                     words = line.split()
-                    atom_coords.append((float(words[1]), float(words[2]), float(words[3]), str(words[4])))
+                    if (words[0] == 'atom_frac'):
+                        latvec = lattice_vectors_array(geom_file)
+                        # Convert from fractional coordinates to Cartesian coordinates using lattice vectors
+                        cart_coords = float(words[1])*latvec[0,:] + float(words[2])*latvec[1,:] + float(words[3])*latvec[2,:]
+                        atom_coords.append((cart_coords.tolist(), str(words[4])))
+                    else:
+                        atom_coords.append((float(words[1]), float(words[2]), float(words[3]), str(words[4])))
                     if line == None:
                         logger.info('Warning! - No atom coordinates found in '+str(geom_file))
     except IOError:
         logger.info("Could not open "+str(geom_file))
     return atom_coords
+    
 
 def find_defect_type(host_coords, defect_coords):
     '''
@@ -248,13 +256,17 @@ def vacancy_coords(host_coords, defect_coords):
     # This is identified as the vacancy in the host supercell
     x_vac, y_vac, z_vac = host_vac_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     # Above in one-liner version of code commented out below
-    #max_dist = 0
-    #for i in range(0, len(all_closest_species)):
-    #    if (all_closest_species[i][3] > max_dist):
-    #        x_vac, y_vac, z_vac = host_coords[i][:3]
-    #        max_dist = all_closest_species[i][3]
+    '''
+    max_dist = 0
+    for i in range(0, len(all_closest_species)):
+        if (all_closest_species[i][3] > max_dist):
+            x_vac, y_vac, z_vac = host_coords[i][:3]
+            max_dist = all_closest_species[i][3]
+    '''
+    # Find line number in coordinates list that corresponds to the defect (in host supercell for vacancy)
+    tmp = host_vac_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     for i in range (0, len(host_coords)):
-        if (host_coords[i][0:3] == x_vac, y_vac, z_vac):
+        if (host_coords[i][0:3] == tmp):
             defect_line = i
     return species_vac, x_vac, y_vac, z_vac, defect_line
 
@@ -289,8 +301,10 @@ def interstitial_coords(host_coords, defect_coords):
     # Find which species in defect where the 'closest distance' to a species in the host supercell is largest
     # This is identified as the interstitial in the defect supercell
     x_int, y_int, z_int = defect_int_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+    # Find line number in coordinates list that corresponds to the defect (in defect supercell for interstitial)
+    tmp = defect_int_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     for i in range (0, len(defect_coords)):
-        if (defect_coords[i][0:3] == x_int, y_int, z_int):
+        if (defect_coords[i][0:3] == tmp):
             defect_line = i
     return species_int, x_int, y_int, z_int, defect_line
 
@@ -326,8 +340,10 @@ def antisite_coords(host_coords, defect_coords):
     # Find which species in defect where the 'closest distance' to a species in the perfect supercell is largest
     # This is identified as the species added into in the defect supercell
     x_in, y_in, z_in = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+    # Find line number in coordinates list that corresponds to the defect (in defect supercell for antisite)
+    tmp = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     for i in range (0, len(defect_coords)):
-        if (defect_coords[i][0:3] == x_in, y_in, z_in):
+        if (defect_coords[i][0:3] == tmp):
             defect_line = i
     return species_in, species_out, x_in, y_in, z_in, defect_line
 

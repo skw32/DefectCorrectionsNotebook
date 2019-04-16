@@ -19,7 +19,6 @@ def read_free_atom_pot(planar_pot_file):
     '''
     try:
         with open(planar_pot_file, 'r') as f:
-            i = 0
             for line in f:
                 if re.search('#Numerical', line):
                     words = line.split()
@@ -32,7 +31,7 @@ def read_free_atom_pot(planar_pot_file):
     
        
 # Compute the atomic potentials for the CoFFEE charge model   
-def compute_atomic_pot(host_atom_num,defect_line,grid,latvec,host_coords,V_G,sigma,G1,G2,G3):
+def model_atomic_pot(host_atom_num,defect_line,grid,latvec,host_coords,V_G,sigma,G1,G2,G3):
     bohr = 1.8897259886 
     latvec = latvec*bohr
     #volume = np.dot(latvec[0,:],np.cross(latvec[1,:],latvec[2,:])) #Redundant lines?
@@ -60,7 +59,7 @@ def compute_atomic_pot(host_atom_num,defect_line,grid,latvec,host_coords,V_G,sig
 
 
 # Obtain the atomic potential from outputs of FHI-aims calculations  
-def atomic_pot_fhiaims_plot(host_atom_num,defect_atom_num,defect_line,latvec,host_coords,host_atom_pot,defect_atom_pot,shift_H,shift_D): 
+def fhiaims_atomic_pot(host_atom_num,defect_atom_num,defect_line,latvec,host_coords,host_atom_pot,defect_atom_pot,shift_H,shift_D): 
     host_pot = open(host_atom_pot,'r')
     host_pot.readline()
     defect_pot = open(defect_atom_pot,'r')
@@ -115,7 +114,8 @@ def atomic_pot_fhiaims_plot(host_atom_num,defect_atom_num,defect_line,latvec,hos
     for i in range(defect_line+1,host_atom_num):
         rel_defect_corr[i-1,:] = host_coords[i,:] - host_coords[defect_line,:]
     for i in range(host_atom_num-1): 
-        a = rel_defect_corr[i,0]*latvec[0,:] + rel_defect_corr[i,1]*latvec[1,:] +rel_defect_corr[i,2]*latvec[2,:]
+#        a = rel_defect_corr[i,0]*latvec[0,:] + rel_defect_corr[i,1]*latvec[1,:] +rel_defect_corr[i,2]*latvec[2,:] # Suzy edits: coords already not fractional so this step is not needed?
+        a = rel_defect_corr[i,0] + rel_defect_corr[i,1] +rel_defect_corr[i,2] # Suzy edits
         distance[i] = np.linalg.norm(a)
     for i in range(0,defect_line): 
         Final[i,0] =  distance[i]
