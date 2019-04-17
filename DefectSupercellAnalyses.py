@@ -5,41 +5,6 @@ import logging
 logger = logging.getLogger()
 
 
-def lattice_vectors_array(geom_file):
-    '''
-    Input crystal geometry file in format for FHI-aims (geometry.in)
-    Function searches for lattice vectors using string 'lattice_vector'
-    Returns each component of the lattice vectors as elements of a 3x3 numpy array
-    '''
-    latt_vec_array = np.zeros([3,3])
-    try:
-        with open(geom_file, 'r') as f:
-            i = 0
-            for line in f:
-                if re.search('lattice_vector', line):
-                    words = line.split()
-                    latt_vec_array[i][0] = float(words[1])
-                    latt_vec_array[i][1] = float(words[2])
-                    latt_vec_array[i][2] = float(words[3])
-                    i += 1
-                    if line == None:
-                        logger.info('Warning! - No lattice vectors found in '+str(geom_file))
-    except IOError:
-        logger.info("Could not open "+str(geom_file))      
-    return latt_vec_array
-
-
-def coords_to_array(coord_list):
-    '''
-    Takes list of atomic coordinates outputted from 'read_atom_coords' function
-    Returns only the coordinates (not species type) as a numpy array
-    '''
-    coords_array = np.zeros([len(coord_list),3])
-    for i in range(len(coord_list)):
-        coords_array[i][0], coords_array[i][1], coords_array[i][2] = coord_list[i][0], coord_list[i][1], coord_list[i][2]
-    return coords_array
-
-
 def count_atoms(geom_file):
     '''
     Input crystal geometry file in format for FHI-aims (geometry.in)
@@ -83,6 +48,30 @@ def read_lattice_vectors(geom_file):
     return x_vecs, y_vecs, z_vecs
 
 
+def lattice_vectors_array(geom_file):
+    '''
+    Input crystal geometry file in format for FHI-aims (geometry.in)
+    Function searches for lattice vectors using string 'lattice_vector'
+    Returns each component of the lattice vectors as elements of a 3x3 numpy array
+    '''
+    latt_vec_array = np.zeros([3,3])
+    try:
+        with open(geom_file, 'r') as f:
+            i = 0
+            for line in f:
+                if re.search('lattice_vector', line):
+                    words = line.split()
+                    latt_vec_array[i][0] = float(words[1])
+                    latt_vec_array[i][1] = float(words[2])
+                    latt_vec_array[i][2] = float(words[3])
+                    i += 1
+                    if line == None:
+                        logger.info('Warning! - No lattice vectors found in '+str(geom_file))
+    except IOError:
+        logger.info("Could not open "+str(geom_file))      
+    return latt_vec_array
+
+
 def get_supercell_dimensions(geom_file):
     '''
     Take maximum of each direction to be supercell dimension for orthogonal unit cells
@@ -106,13 +95,14 @@ def read_atom_coords(geom_file):
     Columns are: x, y, z, species
     '''
     atom_coords = []
+    # For converting from fractional to Cartesian coordinates
+    latvec = lattice_vectors_array(geom_file)
     try:
         with open(geom_file, 'r') as f:
             for line in f:
                 if re.search('atom', line):
                     words = line.split()
                     if (words[0] == 'atom_frac'):
-                        latvec = lattice_vectors_array(geom_file)
                         # Convert from fractional coordinates to Cartesian coordinates using lattice vectors
                         cart_coords = float(words[1])*latvec[0,:] + float(words[2])*latvec[1,:] + float(words[3])*latvec[2,:]
                         atom_coords.append((cart_coords.tolist(), str(words[4])))
@@ -123,7 +113,69 @@ def read_atom_coords(geom_file):
     except IOError:
         logger.info("Could not open "+str(geom_file))
     return atom_coords
-    
+
+
+def coords_to_array(coord_list):
+    '''
+    Takes list of atomic coordinates outputted from 'read_atom_coords' function
+    Returns only the coordinates (not also species type as in read_atom_coords) as a numpy array
+    '''
+    coords_array = np.zeros([len(coord_list),3])
+    for i in range(len(coord_list)):
+        coords_array[i][0], coords_array[i][1], coords_array[i][2] = coord_list[i][0], coord_list[i][1], coord_list[i][2]
+    return coords_array
+
+
+# To-DO: Add test for this function
+def frac_coords_convert(geom_file):
+    '''
+    Inverts lattice vectors for using to convert from Cartesian to fractional coordinates.
+    '''
+    latvec = lattice_vectors_array(geom_file)
+    #lattice_inv_mat = np.linalg.inv(latvec)
+    super_mat = latvec.transpose()
+    super_invmat = np.linalg.inv(super_mat)
+    def wrap_vec(v):
+        relvec = np.dot(super_invmat,v)
+        wrapvec = (relvec+1e-5) % 1.0 - 1e-5
+        return np.dot(super_mat,wrapvec)
+    return super_invmat, wrap_vec
+
+
+# TO-DO: Add test for this function
+def read_atom_coords_frac(geom_file):
+    '''
+    Input crystal geometry file in format for FHI-aims (geometry.in)
+    Function searches for atom using string 'atom' to allow for either 'atom' or 'atom_frac' in the file format
+    If coordinates are not already fractional, they are converted to fractional for compatibility with CoFFEE code routines
+    Returns numpy array of coordinates
+    '''
+    # For converting from Cartesian to fractional coordinates
+    super_invmat, wrap_vec = frac_coords_convert(geom_file)
+    # Initialise np array for coordinates
+    coord_num = count_atoms(geom_file)
+    coords = np.zeros([coord_num,3])
+    frac_coords = np.zeros([coord_num,3])
+    try:
+        with open(geom_file, 'r') as f:
+            i = 0
+            for line in f:
+                if re.search('atom', line):
+                    words = line.split()
+                    if (words[0] != 'atom_frac'):
+                        # Convert from Cartesian coordinates to fractional coordinates using lattice vectors
+                        coords[i,:] = float(words[1]), float(words[2]), float(words[3])
+                        frac_coords[i,:] =  wrap_vec(coords[i,:])
+                        frac_coords[i,:] = np.dot(super_invmat,coords[i,:])
+                    else:
+                        frac_coords[i,:] = float(words[1]), float(words[2]), float(words[3])
+                    if line == None:
+                        logger.info('Warning! - No atom coordinates found in '+str(geom_file))
+                    i +=1 
+    except IOError:
+        logger.info("Could not open "+str(geom_file))   
+    return frac_coords
+
 
 def find_defect_type(host_coords, defect_coords):
     '''

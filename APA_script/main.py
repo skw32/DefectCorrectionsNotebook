@@ -114,8 +114,7 @@ def fhiaims_atomic_pot(host_atom_num,defect_atom_num,defect_line,latvec,host_coo
     for i in range(defect_line+1,host_atom_num):
         rel_defect_corr[i-1,:] = host_coords[i,:] - host_coords[defect_line,:]
     for i in range(host_atom_num-1): 
-#        a = rel_defect_corr[i,0]*latvec[0,:] + rel_defect_corr[i,1]*latvec[1,:] +rel_defect_corr[i,2]*latvec[2,:] # Suzy edits: coords already not fractional so this step is not needed?
-        a = rel_defect_corr[i,0] + rel_defect_corr[i,1] +rel_defect_corr[i,2] # Suzy edits
+        a = rel_defect_corr[i,0]*latvec[0,:] + rel_defect_corr[i,1]*latvec[1,:] +rel_defect_corr[i,2]*latvec[2,:]
         distance[i] = np.linalg.norm(a)
     for i in range(0,defect_line): 
         Final[i,0] =  distance[i]
