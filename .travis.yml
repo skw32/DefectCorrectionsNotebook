@@ -12,9 +12,8 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
 script:
-  - conda install -c breathe coffee_poisson_solver
-  - conda install pytest pytest-cov
+  - conda install -c suzannekwallace coffee_poisson_solver_ko
+  - conda install jupyter pytest pytest-cov
   - pip install NotebookScripter coveralls
-  - pytest --cov-config .coveragerc --cov=. tests/
 after_success:
   - coveralls
