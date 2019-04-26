@@ -16,7 +16,7 @@ To-do:
 
 This project contains a workflow which aims to allow for convenient and explanatory post-processing of charged defect supercells from electronic structure calculations with the all-electron electronic structure software package [FHI-aims](https://aimsclub.fhi-berlin.mpg.de/). There are two major components to the workflow:
 
-1. **DefectCorrectionsNotebook.ipynb** contains a tutorial notebook for performing finite-size correction schemes to obtain the defect formation energy for charged defect supercells for one defect at a time. More information on the correction schemes and processing steps is contained in the notebook. To view the notebook see [here](https://nbviewer.jupyter.org/github/skw32/DefectCorrectionsNotebook/blob/master/DefectCorrectionsNotebook.ipynb).
+1. **DefectCorrectionsNotebook.ipynb** contains a tutorial notebook for performing finite-size correction schemes to obtain the defect formation energy for charged defect supercells for one defect at a time. More information on the correction schemes and processing steps is contained in the notebook. To view a demo of the notebook see [here](https://nbviewer.jupyter.org/github/skw32/DefectCorrectionsNotebook/blob/master/DefectCorrectionsNotebook.ipynb).
 
 2. **DefectCorrectionsDataset.py** allows for running the notebook from the command line for a set of defect supercells data. Further instructions are contained in comments at the top of the script.
 
