@@ -162,3 +162,4 @@ for config in configurations:
 print("FINISHED")
 print("Outputs for all defects processed can be found in directories ProcessedDefects/: "+ ", ".join(defect_dataset.keys()) )
 print("See log.info files in each subdirectory for an overview of the analysis and corrections_summary.dat for final correction terms.")
+print("Have a nice day!")
