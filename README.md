@@ -28,7 +28,7 @@ Other components of this project include:
 - LogFileSetup.py: This file contains the default format of the log file used to store intermediate processing results from the notebook.
 - Plotting.py: This contains functions called in the notebook to generate various plots.
 - coffee.py: This is the main executable for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) package (from version 1.1) that is used in this workflow.
-- LZ_iic.py: This file contains functions used for calculating the image-interaction correction from the LZ correction scheme using functions adapted with permission from [pylada-defects](https://github.com/pylada/pylada-defects)
+- PyladaDefectsImageCharge.py: This file contains functions used for calculating the image-interaction correction from the LZ correction scheme using functions adapted with permission from [pylada-defects](https://github.com/pylada/pylada-defects)
 - tests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
 - sample_data contains some sample defect data for running the notebook. 
 - conftest.py is a configuration file for pytest to define the root directory for the testsuite.
@@ -54,11 +54,11 @@ To use this workflow you must then activate this conda environment with
 
 Alternatively, a conda environment can be created for this workflow and the necessary packages installed one at a time, as outlined below
 
-`conda create -n chooseYourEnvName python=3`
+`conda create -n chooseYourEnvName python=3.6`
 
 `conda activate YourChosenEnvName`
 
-`conda install -c suzannekwallace coffee_poisson_solver_ko`
+`conda install -c suzannekwallace -c conda-forge coffee_poisson_solver_ko pylada`
 
 `conda install jupyter pytest pytest-cov`
 
