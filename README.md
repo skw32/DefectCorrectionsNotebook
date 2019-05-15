@@ -41,7 +41,7 @@ First download a copy of the repository. All analysis should be performed from t
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). The notebook should be run within this conda environment.
 
 
-### Option 1: Create conda env directly from .yml file
+### Option 1: Create your conda env directly from the .yml file
 All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
 
 `conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml` 
@@ -50,7 +50,7 @@ To use this workflow you must then activate this conda environment with
 
 `conda activate YourChosenEnvName`
 
-### Option 2: Create conda env manually
+### Option 2: Create your conda env manually
 
 Alternatively, a conda environment can be created for this workflow and the necessary packages installed one at a time, as outlined below
 
