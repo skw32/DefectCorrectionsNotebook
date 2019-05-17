@@ -24,7 +24,7 @@ Other components of this project include:
 
 - DefectSupercellAnalyses.py: This contains functions used in the notebook workflow that were written for reading in structural information of defect supercells in the geometry file format of FHI-aims ('geometry.in').
 - CoffeeConvenienceFunctions.py: This contains functions used in the notebook workflow to automatically generate input files for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) software package for performing processing steps for applying corrections to charged defect supercells.
-- APA_script: This directory contains code used for performing the potential alignment method with atom-centres and the Kumagai-Oba sampling region (doi: 10.1103/PhysRevB.89.195205), as an alternative to the default in CoFFEE to use planar averages.
+- AtomPotentialAlignment.py: This file contains functions used for performing the potential alignment method with atom-centres and the Kumagai-Oba sampling region (doi: 10.1103/PhysRevB.89.195205) with outputs from FHI-aims, as an alternative to the default in CoFFEE to use planar averages.
 - PyladaDefectsImageCharge.py: This file contains functions used for calculating the image-interaction correction from the LZ correction scheme using functions adapted with permission from [pylada-defects](https://github.com/pylada/pylada-defects).
 - LogFileSetup.py: This file contains the default format of the log file used to store intermediate processing results from the notebook.
 - Plotting.py: This contains functions called in the notebook to generate various plots.

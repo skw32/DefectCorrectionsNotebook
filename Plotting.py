@@ -10,8 +10,8 @@ def py_read(file):
     return grid,vol
 
 def read_file(Filename):  
-    # reading the plane-average-file from FHI-aims output, 
-    #and obtain the free-average-contribution, and the raw data 
+    # Reading the plane-average-file from FHI-aims output, 
+    # and obtain the free-average-contribution, and the raw data 
     F = open(Filename, "r")
     res = F.readline().split()
     dim=len(res)

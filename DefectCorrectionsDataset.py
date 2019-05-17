@@ -1,138 +1,54 @@
 '''
-This script has been written to allow DefectCorrectionsNotebook.ipynb to be run for a set of defect structures
-The user needs to add inputs from the 'User inputs' cell that was in the notebook file
-Below that, the user must then add in a list of the different defects and locations of the data to be processed
+User instructions:
 
-Run the script from command line using 'ipython DefectCorrectionsDataset.py'
+This script has been written to allow DefectCorrectionsNotebook.ipynb to be run for a set of defect structures.
+The user needs to add inputs from the 'User inputs' cell that were in the notebook file.
+Below that, the user must then add in a list of the location of data for the different defects to be processed.
+
+After making these modification, run this script from command line using 'python DefectCorrectionsDataset.py'.
+
 '''
 
 from NotebookScripter import run_notebook
 import os
 
-############## USER INPUTS START BELOW HERE ##############
+############## USER INPUTS START BELOW HERE #################
 
 # Define directory containing all defects data
-base_dir = "/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/EnargiteDefects/fromLandau/Results/data/final_one_shots"
+base_dir = "./sample_data"
 # Info from 'User inputs' cell of notebook that apply to all defects in dataset
 global_configuration = {
     "dielectric_xx": 7.49,
     "dielectric_yy": 6.92,
     "dielectric_zz": 7.19,
     "path_to_all_defects": base_dir,
-    "path_to_host": '/Users/suzannewallace/PhD/PhD_year3/PhDFinalProjects/DefectAnalysis/EnargiteDefects/fromLandau/Results/data/final_one_shots/PerfectReference',
+    "path_to_host": './sample_data/perfect',
     "manual_cutoff": None,
     "LZ": True,
     "FNV": True,
     "atom_centered_pa": True,
     "planar_av_pa": True
 }
-# Dictionary storing location of data for each charged defect to be analysed
-# Dictionary key defines: name of directory output data will be stored in for each defect and then
-# location of neutral defect data, charged defect data and defect charge state must be inputted for each defect that is to be processed
+# Dictionary storing location of data for each charged defect to be analysed 
+# base_dir (defined above) path will be joined to the defect paths below to allow the dictionary to be more compact
+# Dictionary key defines the name of the directory output data will be stored in for each defect and then dictionary entries are:
+# location of neutral defect data, location of charged defect data, defect charge state
 defect_dataset = {
-    "V-S_q=+1_sg=1": [
+    "As-on-Cu_q=+1_sg=1": [
         # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-S/neutral/DefectSpacegroup1", "VacancySupercells/V-S/charged/+1/DefectSpacegroup1", 1
-    ],
-    "V-S_q=+2_sg=1": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-S/neutral/DefectSpacegroup1", "VacancySupercells/V-S/charged/+2/DefectSpacegroup1", 2
-    ],
-    "V-S_q=+1_sg=6_s1": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-S/neutral/DefectSpacegroup6/structure1", "VacancySupercells/V-S/charged/+1/DefectSpacegroup6/structure1", 1
-    ],
-    "V-S_q=+1_sg=6_s2": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-S/neutral/DefectSpacegroup6/structure2", "VacancySupercells/V-S/charged/+1/DefectSpacegroup6/structure2", 1
-    ],
-    "V-S_q=+2_sg=6_s1": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-S/neutral/DefectSpacegroup6/structure1", "VacancySupercells/V-S/charged/+2/DefectSpacegroup6/structure1", 2
-    ],
-    "V-S_q=+2_sg=6_s2": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-S/neutral/DefectSpacegroup6/structure2", "VacancySupercells/V-S/charged/+2/DefectSpacegroup6/structure2", 2
+        "neutral_antisite", "charged_antisite", 1
     ],
     "V-Cu_q=-1_sg=1": [
         # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-Cu/neutral/DefectSpacegroup1", "VacancySupercells/V-Cu/charged/-1/DefectSpacegroup1", -1
+        "neutral_vacancy", "charged_vacancy", -1
     ],
-    "V-Cu_q=-1_sg=6": [
+    "Cu_i_q=+1_pore1": [
         # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-Cu/neutral/DefectSpacegroup6", "VacancySupercells/V-Cu/charged/-1/DefectSpacegroup6", -1
-    ],
-    "V-As_q=-1_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-As/neutral/DefectSpacegroup6", "VacancySupercells/V-As/charged/-1/DefectSpacegroup6", -1
-    ],
-    "V-As_q=-2_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-As/neutral/DefectSpacegroup6", "VacancySupercells/V-As/charged/-2/DefectSpacegroup6", -2
-    ],
-    "V-As_q=-3_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-As/neutral/DefectSpacegroup6", "VacancySupercells/V-As/charged/-3/DefectSpacegroup6", -3
-    ],
-    "V-As_q=-4_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-As/neutral/DefectSpacegroup6", "VacancySupercells/V-As/charged/-4/DefectSpacegroup6", -4
-    ],
-    "V-As_q=-5_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "VacancySupercells/V-As/neutral/DefectSpacegroup6", "VacancySupercells/V-As/charged/-5/DefectSpacegroup6", -5
-    ],
-    "As_Cu_q=+1_sg=1": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup1", "AntisiteSupercells/As-Cu/charged/+1/DefectSpacegroup1", 1
-    ],
-    "As_Cu_q=+2_sg=1": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup1", "AntisiteSupercells/As-Cu/charged/+2/DefectSpacegroup1", 2
-    ],
-    "As_Cu_q=+3_sg=1": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup1", "AntisiteSupercells/As-Cu/charged/+3/DefectSpacegroup1", 3
-    ],
-    "As_Cu_q=+4_sg=1": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup1", "AntisiteSupercells/As-Cu/charged/+4/DefectSpacegroup1", 4
-    ],
-    "As_Cu_q=+1_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup6", "AntisiteSupercells/As-Cu/charged/+1/DefectSpacegroup6", 1
-    ],
-    "As_Cu_q=+2_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup6", "AntisiteSupercells/As-Cu/charged/+2/DefectSpacegroup6", 2
-    ],
-    "As_Cu_q=+3_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup6", "AntisiteSupercells/As-Cu/charged/+3/DefectSpacegroup6", 3
-    ],
-    "As_Cu_q=+4_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/As-Cu/neutral/DefectSpacegroup6", "AntisiteSupercells/As-Cu/charged/+4/DefectSpacegroup6", 4
-    ],
-    "Cu_As_q=-1_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/Cu-As/neutral/DefectSpacegroup6", "AntisiteSupercells/Cu-As/charged/-1/DefectSpacegroup6", -1
-    ],
-    "Cu_As_q=-2_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/Cu-As/neutral/DefectSpacegroup6", "AntisiteSupercells/Cu-As/charged/-2/DefectSpacegroup6", -2
-    ],
-    "Cu_As_q=-3_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/Cu-As/neutral/DefectSpacegroup6", "AntisiteSupercells/Cu-As/charged/-3/DefectSpacegroup6", -3
-    ],
-    "Cu_As_q=-4_sg=6": [
-        # neutral_dir, charge_dir, charge_state
-        "AntisiteSupercells/Cu-As/neutral/DefectSpacegroup6", "AntisiteSupercells/Cu-As/charged/-4/DefectSpacegroup6", -4
+        "neutral_interstitial", "charged_interstitial", 1
     ]
 }
 
-############## END OF USER INPUTS ##############
+################# END OF USER INPUTS #####################
 
 
 # Notebook parameters for specific charged defect being processed
@@ -159,7 +75,8 @@ for config in configurations:
     except Exception as err:
         print("Caught error when executing notebook: {0}".format(err))
 
+print("")
 print("FINISHED")
 print("Outputs for all defects processed can be found in directories ProcessedDefects/: "+ ", ".join(defect_dataset.keys()) )
-print("See log.info files in each subdirectory for an overview of the analysis and corrections_summary.dat for final correction terms.")
+print("See log.info files in each subdirectory for an overview of the analysis and corrections_summary.dat for final correction terms")
 print("Have a nice day!")
