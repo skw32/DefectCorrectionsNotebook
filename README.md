@@ -7,7 +7,6 @@ To-do:
 
 - Add option for FNV alignment step with planar av or atom centres
 - Add option for LZ Ecor 
-- Add final pa step with option to use planar av or atom centres
 - Add tests for LZ Ecor, pa steps and new functions
 - Finish writing paper.md (with sample outputs)
 - Compare workflow results to Tong's defects processed by hand
@@ -27,7 +26,8 @@ Other components of this project include:
 - AtomPotentialAlignment.py: This file contains functions used for performing the potential alignment method with atom-centres and the Kumagai-Oba sampling region (doi: 10.1103/PhysRevB.89.195205) with outputs from FHI-aims, as an alternative to the default in CoFFEE to use planar averages.
 - PyladaDefectsImageCharge.py: This file contains functions used for calculating the image-interaction correction from the LZ correction scheme using functions adapted with permission from [pylada-defects](https://github.com/pylada/pylada-defects).
 - LogFileSetup.py: This file contains the default format of the log file used to store intermediate processing results from the notebook.
-- Plotting.py: This contains functions called in the notebook to generate various plots.
+- PlottingFunctions.py: This contains functions called in the notebook to generate various plots.
+- DefectCorrectionsCondaEnv.yml: This file stored the conda environment used to run this workflow (see installation instructions below).
 - coffee.py: This is the main executable for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) package (from version 1.1) that is used in this workflow.
 - tests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
 - sample_data contains some sample defect data for running the notebook. 
@@ -42,9 +42,9 @@ This workflow uses python3. The most convenient way to setup the python environm
 
 
 ### Option 1: Create your conda env directly from the .yml file
-All dependencies present when testing this workflow are listed in DefectCorrections_conda_env.yml. This environment can be re-created using conda with 
+All dependencies present when testing this workflow are listed in DefectCorrectionsCondaEnv.yml. This environment can be re-created using conda with 
 
-`conda env create -n chooseYourEnvName --file DefectCorrections_conda_env.yml` 
+`conda env create -n chooseYourEnvName --file DefectCorrectionsCondaEnv.yml` 
 
 To use this workflow you must then activate this conda environment with 
 
