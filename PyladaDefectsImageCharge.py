@@ -62,7 +62,7 @@ def thirdO(latt_vec_array, charge, n):
     """
 
     cell_scale = 1.0 # SKW: In notebook workflow cell parameters are converted to Cartesians and units of Angstroms  
-    cell = (latt_vec_array*cell_scale*a0)  # SKW: CHECK THIS IS CORRECT WAY TO RESCALE w/ a0!!!
+    cell = (latt_vec_array*cell_scale*a0) 
 
     #Anuj_05/22/18:modified to "third_order"
     thirdO = third_order(cell, n) * (4e0*pi/3e0) * Ry.rescale(eV) * charge * charge

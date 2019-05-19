@@ -89,5 +89,5 @@ For any queries or bugs to report, please contact suzywallace501@gmail.com
 
 - Volker Blum (Duke University)
 - Nathaniel Cohen for support in the development of this workflow and for the [NotebookScripter](https://github.com/breathe/NotebookScripter) library
-- Many useful discussions on defect correction techniques were provided by [Stephan Lany, Anuj Goyal and Prashun Gorai](https://github.com/pylada/pylada-defects) (NREL)
-- Extensive use has been made of the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) and [pylada-defects](https://github.com/pylada/pylada-defects) software packages for implementing finite-size corrections to defect supercells
+- Many useful discussions on defect correction techniques were provided by [Stephan Lany, Anuj Goyal, Prashun Gorai and Vladan Stevanovic](https://github.com/pylada/pylada-defects) (NREL)
+- Software packages: [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) and [pylada-defects](https://github.com/pylada/pylada-defects) are used for implementing finite-size corrections to defect supercells with different correction schemes

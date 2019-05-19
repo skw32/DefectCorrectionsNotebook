@@ -12,7 +12,7 @@ def count_atoms(geom_file):
     Counts number of lines in file starting with 'atom' to allow for use of 'atom' or 'atom_frac'.
     N.B. It is important lines containing atom coordinates have not been commented out to create the defect.
 
-    Returns: Number of atoms identified in file
+    Returns: Number of atoms identified in file (int)
     '''
     atom_num = 0
     try:
@@ -31,7 +31,7 @@ def read_lattice_vectors(geom_file):
 
     Function searches for lattice vectors using string 'lattice_vector'
 
-    Returns: x, y and z components of a1, a2 and a3 lattice vectors
+    Returns: lists for x, y and z components of a1, a2 and a3 lattice vectors
     E.g. x_vecs[1], y_vecs[1], z_vecs[1] would be x, y, z components of a2
     '''
     x_vecs = []
@@ -103,7 +103,7 @@ def read_atom_coords(geom_file):
     If coordinates are fractional, these are converted to Cartesian coordinates
 
     Returns: List of lists for all atom coordinates where atom_coords[row][col]
-    Columns are: x, y, z, species
+    Columns are: x, y, z, species and each row is a different atom
     '''
     atom_coords = []
     # For converting from fractional to Cartesian coordinates
@@ -116,7 +116,7 @@ def read_atom_coords(geom_file):
                     if (words[0] == 'atom_frac'):
                         # Convert from fractional coordinates to Cartesian coordinates using lattice vectors
                         cart_coords = float(words[1])*latvec[0,:] + float(words[2])*latvec[1,:] + float(words[3])*latvec[2,:]
-                        atom_coords.append((cart_coords.tolist(), str(words[4])))
+                        atom_coords.append((cart_coords[0], cart_coords[1], cart_coords[2], str(words[4])))
                     else:
                         atom_coords.append((float(words[1]), float(words[2]), float(words[3]), str(words[4])))
                     if line == None:

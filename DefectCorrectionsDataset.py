@@ -15,14 +15,14 @@ import os
 ############## USER INPUTS START BELOW HERE #################
 
 # Define directory containing all defects data
-base_dir = "./sample_data"
+base_dir = "./sample_data/relaxed_defects/Cu3AsS4"
 # Info from 'User inputs' cell of notebook that apply to all defects in dataset
 global_configuration = {
     "dielectric_xx": 7.49,
     "dielectric_yy": 6.92,
     "dielectric_zz": 7.19,
     "path_to_all_defects": base_dir,
-    "path_to_host": './sample_data/perfect',
+    "path_to_host": './sample_data/relaxed_defects/Cu3AsS4/perfect',
     "manual_cutoff": None,
     "LZ": True,
     "FNV": True,
