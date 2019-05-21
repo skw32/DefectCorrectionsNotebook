@@ -7,7 +7,7 @@ Modified by Suzanne K. Wallace (with permission) for incorporation into DefectCo
 """
 
 import numpy as np
-from PoissonSolver import atomic_3d   # SKW edits: after updating coffee_poisson_solver_ko conda pkg
+from PoissonSolver import atomic_3d, atomic_3d_interstitial   # SKW edits: after updating coffee_poisson_solver_ko conda pkg
 import logging
 import re
 logger = logging.getLogger()
@@ -80,8 +80,11 @@ def model_atomic_pot(defect_type,host_atom_num,defect_line,grid,lattice_vec_arra
     lattice_vec_array = lattice_vec_array*bohr
     # Calculate coordinates of atoms in host lattice relative to defect coordinates, but omitting coordinates of defect
     distance = host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec_array, host_coords_array, defect_coords_array)
-    # SKW: **CHECK WITH TONG:** Looks like V_atomic always skips defect_line, so gives broadcasting error for interstitials when filling model_atom_pots array
-    V_atomic = atomic_3d(defect_line,host_atom_num,sigma,grid,lattice_vec_array,host_coords_array,V_G,G1,G2,G3)
+    # SKW: New atomic_3d functions need testing!!
+    if (defect_type == 'interstitial'):
+        V_atomic = atomic_3d_interstitial(defect_line,host_atom_num,sigma,grid,lattice_vec_array,host_coords_array,V_G,G1,G2,G3)
+    else: # Use function for antisites or vacancies that skip defect in host supercell
+        V_atomic = atomic_3d(defect_line,host_atom_num,sigma,grid,lattice_vec_array,host_coords_array,V_G,G1,G2,G3)
     if (defect_type == 'interstitial'): # All atoms included when calculating 'distance' above
         model_atom_pots = np.zeros([host_atom_num,2])
     else: # Defect species skipped when calculating 'distance' above for antisites or vacancies
