@@ -6,4 +6,4 @@ The different test scripts include:
 - test_Notebook.py: this involves integration tests for multiple operations performed within the 'DefectCorrectionsNotebook.ipynb' for energy correction terms for sample defects. Sample data is inputted into the notebook and parameters (such as energy correction terms) are extracted using the NotebookScripter library.
 
 
-The 'TestData' directory contains sample FHI-aims structure files (geometry.in) for a perfect supercell of Cu3AsS4 and defect supercells: S vacancy, Cu interstitial, As-on-Cu antisite, all with a +1 charge state.
+The 'TestData' directory contains sample FHI-aims structure files (geometry.in) for a perfect supercell of Cu3AsS4 and defect supercells: S vacancy, Cu interstitial, As-on-Cu antisite, all with a +1 charge state. The dataset is fixed to ensure it is valid to compare new test results to the pre-computed values.

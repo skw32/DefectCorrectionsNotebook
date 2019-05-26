@@ -5,11 +5,9 @@
 
 To-do:
 
-- Add option for FNV alignment step with planar av or atom centres
-- Add option for LZ Ecor 
-- Add tests for LZ Ecor, pa steps and new functions
+- Integration with pylada-defects for LZ icc calculations
+- Add tests for LZ Ecor, new pa steps and new functions
 - Finish writing paper.md (with sample outputs)
-- Compare workflow results to Tong's defects processed by hand
 
 # DefectCorrectionsNotebook: Overview
 
