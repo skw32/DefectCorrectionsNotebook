@@ -87,8 +87,8 @@ def get_imagecharge(latt_vec_array, charge, epsilon, cutoff=100., n=100, verbose
         Verbose = Madelung_energy, 3rd Order, shape-factor csh, scaling f, final_image_correction in eV
     """
 
-    E1 = get_madelungenergy(latt_vec_array, charge, epsilon, cutoff)
-    E3 = -1.*thirdO(latt_vec_array, charge, n)
+    E1 = get_madelungenergy(latt_vec_array, 1e0, 1e0, cutoff)
+    E3 = -1.*thirdO(latt_vec_array, 1e0, n)
 
     if epsilon == 1e0:
         # epsilon==1e0, meaning vacuum                                                                                 
