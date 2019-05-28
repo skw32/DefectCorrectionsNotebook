@@ -70,7 +70,7 @@ def thirdO(latt_vec_array, charge, n):
     return thirdO
 
 ##############################################################
-def get_imagecharge(latt_vec_array, charge, epsilon, cutoff=100., n=100, verbose=True, **kwargs):
+def get_imagecharge(latt_vec_array, charge, epsilon, cutoff, n=20, verbose=True, **kwargs):
     """ Function returns complete image charge correction (Madelung + scaled 3rd Order)
         Reference: S. Lany and A. Zunger, Model. Simul. Mater. Sci. Eng. 17, 0842002 (2009)[Eq. 11]
 
