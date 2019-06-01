@@ -27,7 +27,6 @@ def test_notebook():
         "path_to_host": 'tests/TestData/perfect',
         "charge_model_file": 'charge_model.dat',
         "pa_plot_file": 'pa_plot.png',
-        "manual_cutoff": None
     }
     # Dictionary storing location of data for each charged defect to be analysed
     # Dictionary key defines: name of directory output data will be stored in for each defect and then

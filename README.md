@@ -28,7 +28,7 @@ Other components of this project include:
 - DefectCorrectionsCondaEnv.yml: This file stored the conda environment used to run this workflow (see installation instructions below).
 - coffee.py: This is the main executable for the [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) package (from version 1.1) that is used in this workflow.
 - tests: This directory contains tests for functions written for this workflow and sample data to use with the tests.
-- sample_data contains some sample defect data for running the notebook. 
+- sample_data contains some sample defect data for running the notebook.
 - conftest.py is a configuration file for pytest to define the root directory for the testsuite.
 - .travis.yml and .coveragerc are files required for Travis-CI and test coverage respectively.
 
@@ -38,13 +38,13 @@ First download a copy of the repository. All analysis should be performed from t
 
 This workflow uses python3. The most convenient way to setup the python environment for this workflow is to use [Anaconda](https://www.anaconda.com/distribution/). The notebook should be run within this conda environment.
 
-
 ### Option 1: Create your conda env directly from the .yml file
-All dependencies present when testing this workflow are listed in DefectCorrectionsCondaEnv.yml. This environment can be re-created using conda with 
 
-`conda env create -n chooseYourEnvName --file DefectCorrectionsCondaEnv.yml` 
+All dependencies present when testing this workflow are listed in DefectCorrectionsCondaEnv.yml. This environment can be re-created using conda with
 
-To use this workflow you must then activate this conda environment with 
+`conda env create -n chooseYourEnvName --file DefectCorrectionsCondaEnv.yml`
+
+To use this workflow you must then activate this conda environment with
 
 `conda activate YourChosenEnvName`
 
@@ -56,11 +56,7 @@ Alternatively, a conda environment can be created for this workflow and the nece
 
 `conda activate YourChosenEnvName`
 
-`conda install -c suzannekwallace -c conda-forge coffee_poisson_solver_ko pylada`
-
-`conda install jupyter pytest pytest-cov`
-
-`pip install NotebookScripter coveralls`
+`conda install -c suzannekwallace -c conda-forge coffee_poisson_solver_ko pylada jupyter pytest pytest-cov notebookscripter coveralls`
 
 ## License
 
