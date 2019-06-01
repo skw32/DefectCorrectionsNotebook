@@ -3,14 +3,15 @@ User instructions:
 
 This script has been written to allow DefectCorrectionsNotebook.ipynb to be run for a set of defect structures.
 The user needs to add inputs from the 'User inputs' cell that were in the notebook file.
-Below that, the user must then add in a list of the location of data for the different defects to be processed.
+Below that, the user must then add in a list for the location of data for the different defects to be processed.
 
 After making these modification, run this script from command line using 'python DefectCorrectionsDataset.py'.
 
 '''
 
-from NotebookScripter import run_notebook
+from NotebookScripter import run_notebook_in_jupyter
 import os
+import shutil
 
 ############## USER INPUTS START BELOW HERE #################
 
@@ -30,7 +31,7 @@ global_configuration = {
     "planar_av_pa": True
 }
 # Dictionary storing location of data for each charged defect to be analysed 
-# base_dir (defined above) path will be joined to the defect paths below to allow the dictionary to be more compact
+# base_dir path (defined above) will be joined to the defect paths below to allow the dictionary to be more compact
 # Dictionary key defines the name of the directory output data will be stored in for each defect and then dictionary entries are:
 # location of neutral defect data, location of charged defect data, defect charge state
 defect_dataset = {
@@ -51,7 +52,7 @@ defect_dataset = {
 ################# END OF USER INPUTS #####################
 
 
-# Notebook parameters for specific charged defect being processed
+# Notebook parameters for specific charged defect to be processed
 configurations = []
 for name, (neutral_dir, charge_dir, charge_state) in defect_dataset.items():
     # make sure required inputs exists
@@ -71,12 +72,13 @@ for name, (neutral_dir, charge_dir, charge_state) in defect_dataset.items():
 # Use NotebookScripter to run notebook for each charged defect in turn
 for config in configurations:
     try:
-        notebook = run_notebook("./DefectCorrectionsNotebook.ipynb", **global_configuration, **config)
+        notebook = run_notebook_in_jupyter("./DefectCorrectionsNotebook.ipynb", **global_configuration, **config)("defect_outputs_dir", save_output_notebook="output_DefectCorrectionsNotebook.ipynb")
+        shutil.move("./output_DefectCorrectionsNotebook.ipynb", os.path.join(notebook.defect_outputs_dir, "output_DefectCorrectionsNotebook.ipynb"))
     except Exception as err:
         print("Caught error when executing notebook: {0}".format(err))
 
 print("")
 print("FINISHED")
 print("Outputs for all defects processed can be found in directories ProcessedDefects/: "+ ", ".join(defect_dataset.keys()) )
-print("See log.info files in each subdirectory for an overview of the analysis and corrections_summary.dat for final correction terms")
+print("See log.info files in each subdirectory for an overview of the analysis and corrections_summary.dat for final correction terms.")
 print("Have a nice day!")

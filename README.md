@@ -42,7 +42,7 @@ This workflow uses python3. The most convenient way to setup the python environm
 ### Option 1: Create your conda env directly from the .yml file
 All dependencies present when testing this workflow are listed in DefectCorrectionsCondaEnv.yml. This environment can be re-created using conda with 
 
-`conda env create -n chooseYourEnvName --file DefectCorrectionsCondaEnv.yml` 
+`conda env create -n YourChosenEnvName --file DefectCorrectionsCondaEnv.yml` 
 
 To use this workflow you must then activate this conda environment with 
 
@@ -52,7 +52,7 @@ To use this workflow you must then activate this conda environment with
 
 Alternatively, a conda environment can be created for this workflow and the necessary packages installed one at a time, as outlined below
 
-`conda create -n chooseYourEnvName python=3.6`
+`conda create -n YourChosenEnvName python=3.6`
 
 `conda activate YourChosenEnvName`
 
@@ -87,5 +87,5 @@ For any queries or bugs to report, please contact suzywallace501@gmail.com
 
 - Volker Blum (Duke University)
 - Nathaniel Cohen for support in the development of this workflow and for the [NotebookScripter](https://github.com/breathe/NotebookScripter) library
-- Many useful discussions on defect correction techniques were provided by [Stephan Lany, Anuj Goyal, Prashun Gorai and Vladan Stevanovic](https://github.com/pylada/pylada-defects) (NREL)
+- Many useful discussions on defect correction techniques were provided by [Stephan Lany, Anuj Goyal, Prashun Gorai and Vladan Stevanovic](https://github.com/pylada/pylada-defects) (NREL and Colorado School of Mines)
 - Software packages: [CoFFEE](https://www.sciencedirect.com/science/article/pii/S0010465518300158) and [pylada-defects](https://github.com/pylada/pylada-defects) are used for implementing finite-size corrections to defect supercells with different correction schemes
