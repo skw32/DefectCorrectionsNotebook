@@ -58,7 +58,7 @@ def host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec
     if (defect_type == 'antisite' or defect_type == 'vacancy'): # Defect is skipped in host supercell and all other atoms coordinates are plotted relative to defect position
         if (defect_line == 0):
             for i in range(1,host_atom_num): # Omit first set of coordinates for defect 
-                rel_defect_corr[i,:] = host_coords_array[i,:] - host_coords_array[defect_line,:]
+                rel_defect_corr[i-1,:] = host_coords_array[i,:] - host_coords_array[defect_line,:]
         elif (defect_line > 0 and defect_line < host_atom_num-1): # Omit defect_line
             for i in range(0,defect_line): 
                 rel_defect_corr[i,:] = host_coords_array[i,:] - host_coords_array[defect_line,:]
