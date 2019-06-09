@@ -1,0 +1,15 @@
+#The whole information about your defect dataset 
+#The base_dir are your directory where contain your whole defect types, which must be specified in the DefectCorrectionsDataset.py    
+#The structure of this file should follow the following structures 
+# [Output_dir] [Neutral_defect_dir] [Charge_defect_dir] [Charge_states]
+# The absolute path to your neutral_defect would be   /base_dir/Neutral_defect_dir 
+# The absolute path to your charge defect would be   /base_dir/Charge_defect_dir 
+#
+# For Planer average potential alignment: 
+#        if you want to obtain the potential alignment plots as those in the original COFFEE paper:  
+#           You must offer the neutral_defect properties(potential and geometry). Otherwise, the output from the code would be problamatic
+#        if you want to obtain the potential alignment plot as that in the original FNV paper: 
+#           you can omit the neutral_defect properties. By doing this, you can just set the [Neutral_defect_dir] as that in [Charge_defect_dir] 
+# For Atom average potential alignment: 
+#        you can direct omit the neutral_defect properties. By doing this, you can just set the [Neutral_defect_dir] as that in [Charge_defect_dir] 
+VC_diamond   neutral  charged_q=-2  -2

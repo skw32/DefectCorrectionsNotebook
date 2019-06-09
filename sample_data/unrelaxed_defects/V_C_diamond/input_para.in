@@ -1,0 +1,14 @@
+#The input properties as that in User input in the DefectCorrectionsNotebook.ipnyb 
+#You can find the detailed explanations there   
+dielectric_xx           5.76
+dielectric_yy           5.76
+dielectric_zz           5.76
+path_to_all_defects     './sample_data/unrelaxed_defects/V_C_diamond'
+path_to_host            './sample_data/unrelaxed_defects/V_C_diamond/perfect'
+manual_cutoff           20.0
+manual_sigma            2.614   
+LZ                      True
+FNV                     True
+atom_centered_pa        True
+planar_av_pa            True 
+IC                      False 
