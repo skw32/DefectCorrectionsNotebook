@@ -225,15 +225,30 @@ def count_species(host_coords, defect_coords):
     Next two outputs are the number of each of these species in the host and defect supercell, in the same order
 
     Assumption is made that only intrinsic defects are present, hence same atom types are present in host and defect supercells
+    TZ: This assumption is not always work, and extrinsic defects is normal in the ``antisite" case, and ``interstitials". 
+        As a result, I change the species count based on the defect supercell: 
+        For intrinsic defects, it will be the same as before: 
+        However, for extrinsic defects, it will count the extrinsic species, and the number in the host would be zero.   
     '''
-    # Obtain list of all species contained in host supercell
-    species = []
-    current_species = host_coords[0][3]
-    species.append(host_coords[0][3])
-    for i in range(0, len(host_coords)):
-        if (host_coords[i][3] != current_species):
-            species.append(host_coords[i][3])
-            current_species = host_coords[i][3]         
+    species = [] 
+    current_species = defect_coords[0][3]
+    species.append(defect_coords[0][3])
+    for i in range(0,len(defect_coords)):
+        if (defect_coords[i][3] != current_species): 
+            species.append(defect_coords[i][3])
+            current_species = defect_coords[i][3]
+    #eliminate the duplicate species 
+    species = list(set(species))       
+    #Suzy original code, keep it here. 
+    #Obtain list of all species contained in host supercell
+    #species = []
+    #current_species = host_coords[0][3]
+    #species.append(host_coords[0][3])
+    #for i in range(0, len(host_coords)):
+    #    if (host_coords[i][3] != current_species):
+    #        species.append(host_coords[i][3])
+    #        current_species = host_coords[i][3]         
+    
     # Count number of each species in host supercell
     host_species_nums = []
     for j in range(0, len(species)):
@@ -298,10 +313,16 @@ def find_antisite(host_coords, defect_coords):
 
     Returns: Two strings, the first is the species added into the defect supercell to make the antisite defect 
     and the second is the species removed from the host
+    
     '''
+     
     species, host_species_nums, defect_species_nums = count_species(host_coords, defect_coords)
     species_in = 'no species in'
-    species_out = 'no species out'
+    species_out = 'no species out'     
+    #If this is only used to find antisite, it's more easy to do the selections. 
+    #the following code is not always work for the reason that people may change the antisite defects at any positions they want, as a result, the same species may not be in the same positions.   for example: 
+
+
     for i in range (0, len(species)):
         if (host_species_nums[i] == defect_species_nums[i]-1):
             species_in = species[i]
@@ -403,35 +424,60 @@ def antisite_coords(host_coords, defect_coords):
     Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function
     Returns: Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
     defect_line for an antisite is defined as the line number in the defect supercell of the atom not present in the host supercell
+    TZ:  The way to find the defect is worng for some specific structures, we should find a better way to find the defect atoms. 
+    I try to fixed that within the antisite_coords first, probably similar job should be done in the other routines, i.e. vacancies, and interstitial.   
     '''
     species_in, species_out = find_antisite(host_coords, defect_coords)
+
     # Find species_in in defect supercell mostly using function for finding interstitial
-    # Read in coordinates of antisite_in species in perfect host supercell
+    # Read in coordinates of antisite_out species in perfect host supercell
+    # TZ: To make it work for all cases, this should be species_out in the host, and species_in in the defects. 
+    # The defect atoms can be find to be the smallest distance between this coordinates.  the other difference existed in the crystal 
+    # should always be larger than this small changes.   
+
     host_in_coords = []
     for i in range (0, len(host_coords)):
         if (host_coords[i][3] == species_in):
             host_in_coords.append(host_coords[i][:3]) 
-    # Read in coordinates of antisite_in species in defect supercell
+    # Read in coordinates of antisite_out species in defect supercell
     defect_in_coords = []
     for i in range (0, len(defect_coords)):
         if (defect_coords[i][3] == species_in):
             defect_in_coords.append(defect_coords[i][:3])  
     # Find closest antisite_in species in host supercell for each one in defect supercell
-    all_closest_species = []
-    for x_defect, y_defect, z_defect in defect_in_coords:
-        closest_species = None
-        min_distance = None
-        for x_host, y_host, z_host in host_in_coords:
-            distance_to_defect = sqrt( (abs(x_host-x_defect)*abs(x_host-x_defect)) + (abs(y_host-y_defect)*abs(y_host-y_defect)) + (abs(z_host-z_defect)*abs(z_host-z_defect)))
-            if min_distance is None or distance_to_defect < min_distance:
-                min_distance = distance_to_defect
-                closest_species = [x_defect, y_defect, z_defect]
-        all_closest_species.append(closest_species + [min_distance])
+# Original code from suzy 
+#    all_closest_species = []
+#    for x_defect, y_defect, z_defect in defect_in_coords:
+#        closest_species = None
+#        min_distance = None
+#        for x_host, y_host, z_host in host_in_coords:
+#            distance_to_defect = sqrt( (abs(x_host-x_defect)*abs(x_host-x_defect)) + (abs(y_host-y_defect)*abs(y_host-y_defect)) + (abs(z_host-z_defect)*abs(z_host-z_defect)))
+#            if min_distance is None or distance_to_defect < min_distance:
+#                min_distance = distance_to_defect
+#                closest_species = [x_defect, y_defect, z_defect]
+#        all_closest_species.append(closest_species + [min_distance])
+    if not host_in_coords: 
+        #if the species_in coords in the host cell are an empty list, which means the species in is extrinsic defects. 
+        x_in, y_in, z_in = defect_in_coords[0][:3] 
+    else: 
+        #if the species_in coords are not belong to a extrinsic defect type, we compare the min_distance value of the corrd of species_in in the host and defect 
+        #atoms has the largest min distance value is the defect atoms
+        all_closest_species = []
+        for x_defect, y_defect, z_defect in defect_in_coords:
+            closest_species = None
+            min_distance = None
+            for x_host, y_host, z_host in host_in_coords:
+                distance_to_defect = sqrt( (abs(x_host-x_defect)*abs(x_host-x_defect)) + (abs(y_host-y_defect)*abs(y_host-y_defect)) + (abs(z_host-z_defect)*abs(z_host-z_defect)))
+                if min_distance is None or distance_to_defect < min_distance:
+                    min_distance = distance_to_defect
+                    closest_species = [x_defect, y_defect, z_defect]
+            all_closest_species.append(closest_species + [min_distance])
     # Find which species in defect where the 'closest distance' to a species in the perfect supercell is largest
     # This is identified as the species added into in the defect supercell
-    x_in, y_in, z_in = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+        x_in, y_in, z_in = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
     # Find line number in coordinates list that corresponds to the defect (in defect supercell for antisite)
-    tmp = defect_in_coords[np.argmax([i[3] for i in all_closest_species])][:3]
+    tmp = (x_in, y_in, z_in)
+    #tmp = defect_in_coords[np.argmin([i[3] for i in all_closest_species])][:3]
     for i in range (0, len(defect_coords)):
         if (defect_coords[i][0:3] == tmp):
             defect_line = i
