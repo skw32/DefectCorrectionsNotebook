@@ -13,6 +13,10 @@ import re
 logger = logging.getLogger()
 
 
+
+
+
+
 def read_free_atom_pot(planar_pot_file):
     '''
     Arguments: planar average of electrostatic potential file from FHI-aims calculation
@@ -62,8 +66,15 @@ def host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec
                 rel_defect_corr[i-1,:] = host_coords_array[i,:] - host_coords_array[defect_line,:]
         else: # Defect line is final line of host supercell
             for i in range(0,host_atom_num-1): # Omit final set of coordinates for defect 
-                rel_defect_corr[i,:] = host_coords_array[i,:] - host_coords_array[defect_line,:]
+                rel_defect_corr[i,:] = host_coords_array[i,:] - host_coords_array[defect_line,:] 
+        
         for i in range(host_atom_num-1): 
+            #adding this iteration by considering the effects from other defect images.   
+            for k in range(3): 
+                if rel_defect_corr[i,k] > 0.5: 
+                    rel_defect_corr[i,k] -= 1
+                if rel_defect_corr[i,k] < -0.5: 
+                    rel_defect_corr[i,k] += 1 
             a = rel_defect_corr[i,0]*lattice_vec_array[0,:] + rel_defect_corr[i,1]*lattice_vec_array[1,:] +rel_defect_corr[i,2]*lattice_vec_array[2,:]
             distance[i] = np.linalg.norm(a)
 
@@ -77,7 +88,25 @@ def model_atomic_pot(defect_type,host_atom_num,defect_line,grid,lattice_vec_arra
     Returns:
     '''
     bohr = 1.8897259886 
-    lattice_vec_array = lattice_vec_array*bohr
+    lattice_vec_array = lattice_vec_array*bohr 
+    # TZ: after thinking this question deeply, I think the plot shoulde be  based on the defect coordinates for the reason that we relaxed the cell.
+    # A simple trick to fix this problem but not changing too much the code, is just replacing the atomic coordinates in the host_corrds here within the
+    # defect_coords, So it will output the model potential based on the defect coords and the distance based on the defect coords, but without any effects
+    # to other part of the code. 
+    if (defect_type == 'interstitial' or defect_type == 'antisite'): 
+        host_coords_array = defect_coords_array 
+    if (defect_type == 'vacancy'): 
+        if (defect_line == 0):
+            for i in range(1,host_atom_num): # Omit first set of coordinates for defect 
+                host_coords_array[i,:] = defect_coords_array[i-1,:]
+        elif (defect_line > 0 and defect_line < host_atom_num-1): # Omit defect_line
+            for i in range(0,defect_line): 
+                host_coords_array[i,:] = defect_coords_array[i,:]
+            for i in range(defect_line+1,host_atom_num):
+                host_coords_array[i,:] = defect_coords_array[i-1,:]
+        else: # Defect line is final line of host supercell
+            for i in range(0,host_atom_num-1): # Omit final set of coordinates for defect 
+                host_coords_array[i,:] = defect_coords_array[i,:]
     # Calculate coordinates of atoms in host lattice relative to defect coordinates, but omitting coordinates of defect
     distance = host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec_array, host_coords_array, defect_coords_array)
     # SKW: New atomic_3d functions need testing!!
@@ -182,6 +211,21 @@ def fhiaims_atomic_pot(defect_type, host_atom_num,defect_atom_num,defect_line,la
     # Preparing pa plot with potentials read in above and free atom potential shifts read in from planar average FHI-aims output file
     result = D_pot -shift_D -(h_pot - shift_H)  
     # Calculate coordinates of atoms in host lattice relative to defect coordinates, but omitting coordinates of defect
+    # TZ: same trick as that in the "model potential output", changing the distance to that in the defect coordinates.    
+    if (defect_type == 'interstitial' or defect_type == 'antisite'): 
+        host_coords_array = defect_coords_array 
+    if (defect_type == 'vacancy'): 
+        if (defect_line == 0):
+            for i in range(1,host_atom_num): # Omit first set of coordinates for defect 
+                host_coords_array[i,:] = defect_coords_array[i-1,:]
+        elif (defect_line > 0 and defect_line < host_atom_num-1): # Omit defect_line
+            for i in range(0,defect_line): 
+                host_coords_array[i,:] = defect_coords_array[i,:]
+            for i in range(defect_line+1,host_atom_num):
+                host_coords_array[i,:] = defect_coords_array[i-1,:]
+        else: # Defect line is final line of host supercell
+            for i in range(0,host_atom_num-1): # Omit final set of coordinates for defect 
+                host_coords_array[i,:] = defect_coords_array[i,:]
     distance = host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec_array, host_coords_array, defect_coords_array)
 
     if (defect_type == 'interstitial'): # All host coordinates are plotted, relative to defect location in defect supercell
