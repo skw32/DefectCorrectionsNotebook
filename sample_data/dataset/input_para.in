@@ -1,0 +1,14 @@
+#The input properties as that in User input in the DefectCorrectionsNotebook.ipnyb 
+#You can find the detailed explanations there   
+dielectric_xx           12.7
+dielectric_yy           12.7
+dielectric_zz           12.7
+path_to_all_defects     './sample_data/dataset'
+path_to_host            './sample_data/dataset/origin'
+manual_cutoff           20.0
+manual_sigma            2.6    
+LZ                      True
+FNV                     True
+atom_centered_pa        False
+planar_av_pa            True 
+IC                      False 
