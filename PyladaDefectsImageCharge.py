@@ -62,7 +62,7 @@ def thirdO(latt_vec_array, charge, n):
     """
 
     cell_scale = 1.0 # SKW: In notebook workflow cell parameters are converted to Cartesians and units of Angstroms  
-    cell = (latt_vec_array*cell_scale*a0) 
+    cell = (latt_vec_array*cell_scale) * angstrom.rescale(a0) 
 
     #Anuj_05/22/18:modified to "third_order"
     thirdO = third_order(cell, n) * (4e0*pi/3e0) * Ry.rescale(eV) * charge * charge
@@ -86,7 +86,7 @@ def get_imagecharge(latt_vec_array, charge, epsilon, cutoff, n=20, verbose=True,
         Non-verbose = Madelung + scaled 3rd order image charge correction in eV
         Verbose = Madelung_energy, 3rd Order, shape-factor csh, scaling f, final_image_correction in eV
     """
-    
+
     E1 = get_madelungenergy(latt_vec_array, charge=1e0, epsilon=1e0, cutoff=cutoff)
     E3 = -1.*thirdO(latt_vec_array, charge=1e0, n=n)
 

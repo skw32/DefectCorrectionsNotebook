@@ -5,8 +5,7 @@
 
 To-do:
 
-- Integration with pylada-defects for LZ icc calculations
-- Add tests for LZ Ecor, new pa steps and new functions
+- Add pytests for LZ Ecor, new pa steps and new functions
 - Finish writing paper.md (with sample outputs)
 
 # DefectCorrectionsNotebook: Overview
