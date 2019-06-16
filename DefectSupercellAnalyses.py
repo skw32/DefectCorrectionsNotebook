@@ -5,14 +5,15 @@ import logging
 logger = logging.getLogger()
 
 
-def count_atoms(geom_file):
-    '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
-    
-    Counts number of lines in file starting with 'atom' to allow for use of 'atom' or 'atom_frac'.
-    N.B. It is important lines containing atom coordinates have not been commented out to create the defect.
+def count_atoms(geom_file: str) -> int:
+    ''' Counts number of lines in file starting with 'atom' to allow for use of 'atom' or 'atom_frac'.
+    NOTE: It is important lines containing atom coordinates have not been commented out to create the defect.
 
-    Returns: Number of atoms identified in file (int)
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
+    
+    Returns: 
+        Number of atoms identified in file (int)
     '''
     atom_num = 0
     try:
@@ -25,14 +26,15 @@ def count_atoms(geom_file):
     return atom_num
 
 
-def read_lattice_vectors(geom_file):
-    '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
+def read_lattice_vectors(geom_file: str) -> list:
+    ''' Function searches for lattice vectors using string 'lattice_vector'
 
-    Function searches for lattice vectors using string 'lattice_vector'
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
 
-    Returns: lists for x, y and z components of a1, a2 and a3 lattice vectors
-    E.g. x_vecs[1], y_vecs[1], z_vecs[1] would be x, y, z components of a2
+    Returns: 
+        lists for x, y and z components of a1, a2 and a3 lattice vectors
+        E.g. x_vecs[1], y_vecs[1], z_vecs[1] would be x, y, z components of a2
     '''
     x_vecs = []
     y_vecs = []
@@ -52,13 +54,14 @@ def read_lattice_vectors(geom_file):
     return x_vecs, y_vecs, z_vecs
 
 
-def lattice_vectors_array(geom_file):
-    '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
+def lattice_vectors_array(geom_file: str) -> tuple:
+    ''' Function searches for lattice vectors using string 'lattice_vector' and returns them as numpy array.
 
-    Function searches for lattice vectors using string 'lattice_vector'
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
 
-    Returns: Each component of the lattice vectors as elements of a 3x3 numpy array
+    Returns: 
+        Each component of the lattice vectors as elements of a 3x3 numpy array
     '''
     latt_vec_array = np.zeros([3,3])
     try:
@@ -78,14 +81,15 @@ def lattice_vectors_array(geom_file):
     return latt_vec_array
 
 
-def get_supercell_dimensions(geom_file):
-    '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
-
-    Take maximum of each direction to be supercell dimension for orthogonal unit cells
+def get_supercell_dimensions(geom_file: str) -> list:
+    ''' Take maximum of each direction to be supercell dimension for orthogonal unit cells
     (allowing for some numerical noise in off-diagonals)
 
-    Returns: List 'supercell_dims' where x = supercell_dims[0], y = supercell_dims[0], z = supercell_dims[2]
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
+
+    Returns: 
+        List 'supercell_dims' where x = supercell_dims[0], y = supercell_dims[0], z = supercell_dims[2]
     '''
     x_vecs, y_vecs, z_vecs = read_lattice_vectors(geom_file)
     supercell_dims = []
@@ -95,15 +99,16 @@ def get_supercell_dimensions(geom_file):
     return supercell_dims
 
 
-def read_atom_coords(geom_file):
-    '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
-
-    Function searches for atom using string 'atom' to allow for either 'atom' or 'atom_frac' in the file format
+def read_atom_coords(geom_file: str) -> list:
+    ''' Function searches for atom using string 'atom' to allow for either 'atom' or 'atom_frac' in the file format
     If coordinates are fractional, these are converted to Cartesian coordinates
 
-    Returns: List of lists for all atom coordinates where atom_coords[row][col]
-    Columns are: x, y, z, species and each row is a different atom
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
+
+    Returns: 
+        List of lists for all atom coordinates where atom_coords[row][col]
+        Columns are: x, y, z, species and each row is a different atom
     '''
     atom_coords = []
     # For converting from fractional to Cartesian coordinates
@@ -126,10 +131,13 @@ def read_atom_coords(geom_file):
     return atom_coords
 
 
-def coords_to_array(coord_list):
+def coords_to_array(coord_list: list) -> tuple:
     '''
-    Arguments: Takes list of atomic coordinates outputted from 'read_atom_coords' function
-    Returns: Only the coordinates (not also species type as in read_atom_coords) as a numpy array
+    Args: 
+        coords_list: list of atomic coordinates outputted from 'read_atom_coords' function
+
+    Returns: 
+        Only the coordinates (not also species type as in read_atom_coords) as a numpy array
     '''
     coords_array = np.zeros([len(coord_list),3])
     for i in range(len(coord_list)):
@@ -138,10 +146,13 @@ def coords_to_array(coord_list):
 
 
 # To-DO: Add test for this function
-def frac_coords_convert(geom_file):
+def frac_coords_convert(geom_file: str) -> tuple:
     '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
-    Returns: Inverts lattice vectors for using to convert from Cartesian to fractional coordinates.
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
+    
+    Returns: 
+        Inverts lattice vectors to use for conversion from Cartesian to fractional coordinates.
     '''
     latvec = lattice_vectors_array(geom_file)
     #lattice_inv_mat = np.linalg.inv(latvec)
@@ -155,14 +166,15 @@ def frac_coords_convert(geom_file):
 
 
 # TO-DO: Add test for this function
-def read_atom_coords_frac(geom_file):
-    '''
-    Arguments: Input crystal geometry file in format for FHI-aims (geometry.in)
-
-    Function searches for atom using string 'atom' to allow for either 'atom' or 'atom_frac' in the file format
+def read_atom_coords_frac(geom_file: str) -> tuple:
+    ''' Function searches for atom using string 'atom' to allow for either 'atom' or 'atom_frac' in the file format
     If coordinates are not already fractional, they are converted to fractional for compatibility with CoFFEE code routines
+
+    Args: 
+        geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
     
-    Returns: Numpy array of fractional coordinates
+    Returns: 
+        Numpy array of fractional coordinates
     '''
     # For converting from Cartesian to fractional coordinates
     super_invmat, wrap_vec = frac_coords_convert(geom_file)
@@ -191,16 +203,18 @@ def read_atom_coords_frac(geom_file):
     return frac_coords
 
 
-def find_defect_type(host_coords, defect_coords):
-    '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function 
-    
-    Compares number of atoms in defect and host supercells to determine type of defect
+def find_defect_type(host_coords: list, defect_coords: list) -> str:
+    ''' Compares number of atoms in defect and host supercells to determine type of defect
     host_atom_num == defect_atom_num+1 --> vacancy
     host_atom_num == defect_atom_num-1 --> interstitial
     host_atom_num == defect_atom_num --> antisite
 
-    Returns: defect_type (vacancy, interstitial, antisite) as a string
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function 
+    
+    Returns: 
+        defect_type (vacancy, interstitial, antisite) as a string
     '''
     host_atom_num = len(host_coords)
     defect_atom_num = len(defect_coords)
@@ -215,20 +229,21 @@ def find_defect_type(host_coords, defect_coords):
     return defect_type
 
 
-def count_species(host_coords, defect_coords):
-    '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function 
-
-    Reads through species in atom_coords[row][3] for host and defect supercells
-
-    Returns: First function output is a list of all different species present in the host supercell
-    Next two outputs are the number of each of these species in the host and defect supercell, in the same order
-
+def count_species(host_coords: list, defect_coords: list) -> list:
+    ''' Reads through species in atom_coords[row][3] for host and defect supercells
     Assumption is made that only intrinsic defects are present, hence same atom types are present in host and defect supercells
     TZ: This assumption is not always work, and extrinsic defects is normal in the ``antisite" case, and ``interstitials". 
         As a result, I change the species count based on the defect supercell: 
         For intrinsic defects, it will be the same as before: 
-        However, for extrinsic defects, it will count the extrinsic species, and the number in the host would be zero.   
+        However, for extrinsic defects, it will count the extrinsic species, and the number in the host would be zero. 
+
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function
+
+    Returns: 
+        First function output is a list of all different species present in the host supercell
+        Next two outputs are the number of each of these species in the host and defect supercell, in the same order
     '''
     species = [] 
     current_species = defect_coords[0][3]
@@ -268,13 +283,15 @@ def count_species(host_coords, defect_coords):
     return species, host_species_nums, defect_species_nums
     
        
-def find_vacancy(host_coords, defect_coords):
-    '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function 
+def find_vacancy(host_coords: list, defect_coords: list) -> str:
+    ''' Find species where count is one less in defect supercell than in host supercell.
 
-    Find species where count is one less in defect supercell than in host supercell
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function
 
-    Returns: vacancy species as a string
+    Returns: 
+        vacancy species as a string
     '''
     species, host_species_nums, defect_species_nums = count_species(host_coords, defect_coords)
     species_vac = 'no vacancy'
@@ -286,13 +303,15 @@ def find_vacancy(host_coords, defect_coords):
     return species_vac
 
 
-def find_interstitial(host_coords, defect_coords):
-    '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function 
+def find_interstitial(host_coords: list, defect_coords: list) -> str:
+    ''' Find species where count is one more in defect supercell than in host supercell.
 
-    Find species where count is one more in defect supercell than in host supercell
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function 
 
-    Returns: interstitial species as a string
+    Returns: 
+        interstitial species as a string
     '''
     species, host_species_nums, defect_species_nums = count_species(host_coords, defect_coords)
     species_int = 'no interstitial'
@@ -304,24 +323,24 @@ def find_interstitial(host_coords, defect_coords):
     return species_int
 
 
-def find_antisite(host_coords, defect_coords):
-    '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function 
+def find_antisite(host_coords: list, defect_coords: list) -> str:
+    ''' Find species where count is one less in defect supercell than in host (species_out).
+    Find species where count is one more in defect supercell than in host (species_in).
 
-    Find species where count is one less in defect supercell than in host (species_out)
-    Find species where count is one more in defect supercell than in host (species_in) 
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function
 
-    Returns: Two strings, the first is the species added into the defect supercell to make the antisite defect 
-    and the second is the species removed from the host
+    Returns: 
+        Two strings, the first is the species added into the defect supercell to make the antisite defect 
+        and the second is the species removed from the host
     
     '''
-     
     species, host_species_nums, defect_species_nums = count_species(host_coords, defect_coords)
     species_in = 'no species in'
     species_out = 'no species out'     
     #If this is only used to find antisite, it's more easy to do the selections. 
     #the following code is not always work for the reason that people may change the antisite defects at any positions they want, as a result, the same species may not be in the same positions.   for example: 
-
 
     for i in range (0, len(species)):
         if (host_species_nums[i] == defect_species_nums[i]-1):
@@ -333,11 +352,15 @@ def find_antisite(host_coords, defect_coords):
     return species_in, species_out
 
 
-def vacancy_coords(host_coords, defect_coords):
+def vacancy_coords(host_coords: list, defect_coords: list) -> tuple:
     '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function
-    Returns: Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
-    defect_line for a vacancy is defined as the line number in the perfect host supercell of the atom missing in the vacancy supercell
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function
+
+    Returns: 
+        Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
+        defect_line for a vacancy is defined as the line number in the perfect host supercell of the atom missing in the vacancy supercell
     '''
     species_vac = find_vacancy(host_coords, defect_coords)  
     # Read in coordinates of vacancy species in perfect host supercell
@@ -380,11 +403,15 @@ def vacancy_coords(host_coords, defect_coords):
     return species_vac, x_vac, y_vac, z_vac, defect_line
 
 
-def interstitial_coords(host_coords, defect_coords):
+def interstitial_coords(host_coords: list, defect_coords: list) -> tuple:
     '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function
-    Returns: Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
-    defect_line for an interstitial is defined as the line number in the defect supercell of the atom not present in the host supercell
+     Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function
+
+    Returns: 
+        Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
+        defect_line for an interstitial is defined as the line number in the defect supercell of the atom not present in the host supercell
     '''
     species_int = find_interstitial(host_coords, defect_coords)  
     # Read in coordinates of interstitial species in perfect host supercell
@@ -419,13 +446,17 @@ def interstitial_coords(host_coords, defect_coords):
     return species_int, x_int, y_int, z_int, defect_line
 
 
-def antisite_coords(host_coords, defect_coords):
-    '''
-    Arguments: lists of coordinates of host supercell and defect supercell obtained with 'read_atom_coords' function
-    Returns: Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
-    defect_line for an antisite is defined as the line number in the defect supercell of the atom not present in the host supercell
-    TZ:  The way to find the defect is worng for some specific structures, we should find a better way to find the defect atoms. 
-    I try to fixed that within the antisite_coords first, probably similar job should be done in the other routines, i.e. vacancies, and interstitial.   
+def antisite_coords(host_coords: list, defect_coords: list) -> tuple:
+    ''' NOTE: TZ:  The way to find the defect is worng for some specific structures, we should find a better way to find the defect atoms. 
+    I try to fixed that within the antisite_coords first, probably similar job should be done in the other routines, i.e. vacancies, and interstitial.
+    
+    Args: 
+        host_coords: lists of coordinates of host supercell obtained with 'read_atom_coords' function 
+        defect_coords: lists of coordinates of defect supercell obtained with 'read_atom_coords' function
+
+    Returns: 
+        Vacancy species as string, vacancy coordinates in the perfect host supercell and the line in the geometry file for the defect
+        defect_line for an antisite is defined as the line number in the defect supercell of the atom not present in the host supercell   
     '''
     species_in, species_out = find_antisite(host_coords, defect_coords)
 
@@ -484,10 +515,19 @@ def antisite_coords(host_coords, defect_coords):
     return species_in, species_out, x_in, y_in, z_in, defect_line
 
 
-def defect_to_boundary(x_defect, y_defect, z_defect, supercell_x, supercell_y, supercell_z):
+def defect_to_boundary(x_defect: float, y_defect: float, z_defect: float, supercell_x: float, supercell_y: float, supercell_z: float) -> float:
     '''
-    Arguments: defect coordinates and supercell dimensions (extracted as part of the notebook workflow and using their default names in the notebook
-    Returns: Closest distances in the x, y and z-directions of the defect to any of the supercell boundaries
+    Args: 
+        x_defect: x-coordinate of defect within the supercell
+        y_defect: y-coordinate of defect within the supercell
+        z_defect: z-coordinate of defect within the supercell
+        supercell_x: dimension of supercell along the x-direction
+        supercell_y: dimension of supercell along the y-direction
+        supercell_z: dimension of supercell along the z-direction
+        (All are extracted as part of the notebook workflow and above are their default names in the notebook)
+    
+    Returns: 
+        Closest distances in the x, y and z-directions of the defect to any of the supercell boundaries
     '''
     # Finding minimum x, y, z distance of defect from supercell boundaries
     x_min = x_defect if (x_defect <= supercell_x/2.0) else supercell_x - x_defect
