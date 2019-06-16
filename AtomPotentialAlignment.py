@@ -17,10 +17,13 @@ logger = logging.getLogger()
 
 
 
-def read_free_atom_pot(planar_pot_file):
+def read_free_atom_pot(planar_pot_file: str) -> float:
     '''
-    Arguments: planar average of electrostatic potential file from FHI-aims calculation
-    Returns: Free atom potential from top line of 'plane_average_realspace_ESP.out' FHI-aims output file
+    Args: 
+        planar_pot_file: planar average of electrostatic potential file from FHI-aims calculation
+
+    Returns: 
+        Free atom potential from top line of 'plane_average_realspace_ESP.out' FHI-aims output file
     '''
     try:
         with open(planar_pot_file, 'r') as f:
@@ -35,10 +38,11 @@ def read_free_atom_pot(planar_pot_file):
     return free_atom_pot 
     
 
-def host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec_array, host_coords_array, defect_coords_array):
+def host_coords_skip_defect(defect_type: str, defect_line: int, host_atom_num: int, lattice_vec_array: tuple, host_coords_array: list, defect_coords_array: tuple) -> tuple:
     '''
-    Arguments: 
-    - defect_type and defect_line are parameters from notebook workflow with default names
+    Args: 
+        defect_type: parameter from notebook workflow with default names (obtained from DefectSupercellAnalysis.find_defect_type)
+        defect_line: parameter from notebook workflow with default names (obtained from DefectSupercellAnalysis.antisite/vacancy/interstitial_coords)
     - host_coords_array and defect_coords_array are numpy arrays for fractional coordinates obtained e.g. with 'host_coords_array = dsa.coords_to_array(host_coords_frac)'
     Returns: coordinates of atoms in host supercell relative to defect position, skipping coordinates of defect in the case of antisite or vacancy
     '''
@@ -77,14 +81,14 @@ def host_coords_skip_defect(defect_type, defect_line, host_atom_num, lattice_vec
                     rel_defect_corr[i,k] += 1 
             a = rel_defect_corr[i,0]*lattice_vec_array[0,:] + rel_defect_corr[i,1]*lattice_vec_array[1,:] +rel_defect_corr[i,2]*lattice_vec_array[2,:]
             distance[i] = np.linalg.norm(a)
-
     return distance
 
 
 # Compute the atomic potentials for the CoFFEE charge model   
 def model_atomic_pot(defect_type,host_atom_num,defect_line,grid,lattice_vec_array,host_coords_array,defect_coords_array,V_G,sigma,G1,G2,G3):
     '''
-    Arguments:
+    Args:
+     
     Returns:
     '''
     bohr = 1.8897259886 
@@ -127,7 +131,8 @@ def model_atomic_pot(defect_type,host_atom_num,defect_line,grid,lattice_vec_arra
 # Obtain the atomic potential from outputs of FHI-aims calculations  
 def fhiaims_atomic_pot(defect_type, host_atom_num,defect_atom_num,defect_line,lattice_vec_array,host_coords_array, defect_coords_array, host_atom_pot,defect_atom_pot,shift_H,shift_D): 
     '''
-    Arguments:
+    Args:
+
     Returns:
     '''
     # Data for atom potentials from FHI-aims outputs

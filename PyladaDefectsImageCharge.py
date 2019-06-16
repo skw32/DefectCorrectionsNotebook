@@ -11,16 +11,16 @@ from pylada.ewald import ewald
 from pylada.crystal.defects import third_order
 
 ##############################################################
-def get_madelungenergy(latt_vec_array, charge, epsilon, cutoff):
+def get_madelungenergy(latt_vec_array: tuple, charge: int, epsilon: float, cutoff: float) -> float:
     """ Function returns leading first order correction term, i.e.,
         screened Madelung-like lattice energy of point charge
     Reference: M. Leslie and M. J. Gillan, J. Phys. C: Solid State Phys. 18 (1985) 973
 
-    Parameters
-        defect = pylada.vasp.Extract object
-        charge = charge of point defect. Default 1e0 elementary charge
-        epsilon = dimensionless relative permittivity, SKW: isotropic average of dielectric constant
-        cutoff = Ewald cutoff parameter
+    Args
+        defect: pylada.vasp.Extract object
+        charge: charge of point defect. Default 1e0 elementary charge
+        epsilon: dimensionless relative permittivity, SKW: isotropic average of dielectric constant
+        cutoff: Ewald cutoff parameter
 
     Returns
         Madelung (electrostatic) energy in eV                                                                                                                
@@ -46,16 +46,16 @@ def get_madelungenergy(latt_vec_array, charge, epsilon, cutoff):
     return -1*result.rescale(eV)
 
 ##############################################################
-def thirdO(latt_vec_array, charge, n):
+def thirdO(latt_vec_array: tuple, charge: int, n: int) -> float:
     """ Function returns 3rd order image charge correction, same as LZ fortran script
     Reference: S. Lany and A. Zunger, Phys. Rev. B 78, 235104 (2008)
                S. Lany and A. Zunger, Model. Simul. Mater. Sci. Eng. 17, 0842002 (2009)
                [Eq. 6, 7]
 
-    Parameters
-        defect = pylada.vasp.Extract object
-        charge = charge of point defect. Default 1e0 elementary charge
-        n = precision in integral of Eq. 7 (LZ 2009), larger the better
+    Args
+        defect: pylada.vasp.Extract object
+        charge: charge of point defect. Default 1e0 elementary charge
+        n: precision in integral of Eq. 7 (LZ 2009), larger the better
 
     Returns
         third image correction in eV
@@ -70,17 +70,17 @@ def thirdO(latt_vec_array, charge, n):
     return thirdO
 
 ##############################################################
-def get_imagecharge(latt_vec_array, charge, epsilon, cutoff, n=20, verbose=True, **kwargs):
+def get_imagecharge(latt_vec_array: tuple, charge: int, epsilon: float, cutoff: float, n: int =20, verbose=True, **kwargs) -> tuple:
     """ Function returns complete image charge correction (Madelung + scaled 3rd Order)
         Reference: S. Lany and A. Zunger, Model. Simul. Mater. Sci. Eng. 17, 0842002 (2009)[Eq. 11]
 
-    Parameters
-        defect = pylada.vasp.Extract object
-        charge = charge of point defect. Default 1e0 elementary charge
-        epsilon = dimensionless relative permittivity, SKW: isotropic average of dielectric constant
-        cutoff = Ewald cutoff parameter
-        n = precision in integral of Eq. 7 (LZ 2009), larger the better
-        verbose = True or False
+    Args
+        defect: pylada.vasp.Extract object
+        charge: charge of point defect. Default 1e0 elementary charge
+        epsilon: dimensionless relative permittivity, SKW: isotropic average of dielectric constant
+        cutoff: Ewald cutoff parameter
+        n: precision in integral of Eq. 7 (LZ 2009), larger the better
+        verbose: True or False
 
     Returns
         Non-verbose = Madelung + scaled 3rd order image charge correction in eV

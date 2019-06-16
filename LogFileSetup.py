@@ -1,8 +1,8 @@
 import logging
 
 def configure_logging(logfile_path):
-    '''
-    Initialize logging defaults for in-notebook messages and 'log.info' file written to store intermediate results during analysis of each defect
+    ''' Initialize logging defaults for in-notebook messages and 
+    'log.info' file written to store intermediate results during analysis of each defect
     
     To use, the following lines must be added to the code: 
         import LogFileSetup as lfs
