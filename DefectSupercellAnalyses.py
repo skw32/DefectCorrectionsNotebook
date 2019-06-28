@@ -7,7 +7,7 @@ logger = logging.getLogger()
 
 def count_atoms(geom_file: str) -> int:
     ''' Counts number of lines in file starting with 'atom' to allow for use of 'atom' or 'atom_frac'.
-    NOTE: It is important lines containing atom coordinates have not been commented out to create the defect.
+    NOTE: It is important lines containing atom coordinates have been deleted (not commented out) to create the defect.
 
     Args: 
         geom_file: input crystal geometry file in format for FHI-aims (geometry.in)
