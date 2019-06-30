@@ -30,7 +30,7 @@ def read_file(Filename):
         i=i+1
     return average_free, result
 
-def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,model,filename): 
+def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,model,filename, user_ymin = None, user_ymax = None, user_xlabel = None, user_ylabel = None, user_title = None): 
     volume = np.dot(lattice[0,:],np.cross(lattice[1,:],lattice[2,:]))
     #define the parameters corresponding to the Wigner-Seize Cells.   
     Rws = (volume*3.0/(4.0*np.pi))**(1.0/3.0)
@@ -43,10 +43,9 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
     matplotlib.rc('font',family='Times New Roman')
     plt.figure(figsize=(5.3,4.0))
   
-    plt.xlim((0,Rwl))
-
     plt.xlabel(r'Distance from a defect ($\AA$)',fontsize=15,fontname = "Times New Roman")
     plt.ylabel('Potential (V)',fontsize=15,fontname = "Times New Roman")
+    plt.xlim((0,Rwl))
 
     if model == False: 
         #Calculate the Potential Alignment Term
@@ -69,11 +68,21 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
 
         mean = (max(aims_atom_pots[:,1]) + min(aims_atom_pots[:,1]))/2.0
 
+        # Options for user to override plot settings
+        if user_title:
+            title = user_title
+        if user_xlabel:
+            plt.xlabel(user_xlabel,fontsize=15,fontname = "Times New Roman")
+        if user_ylabel:
+            plt.ylabel(user_ylabel,fontsize=15,fontname = "Times New Roman")
+        
+        
         #Ploting the alignment plot       
         plt.axvline(x=Rws,linestyle='--',color='orange',lw =2.0) 
         plt.text(Rws,mean,r'$R_{ws}$',color='orange',fontsize=15,fontname = "Times New Roman")
     
-        plt.title(title,fontsize=15,fontname = "Times New Roman")
+        #plt.title(title,fontsize=15,fontname = "Times New Roman")
+        plt.title('test',fontsize=15,fontname = "Times New Roman")
     
         plt.plot(aims_atom_pots[:,0],aims_atom_pots[:,1],'o',ms=5,markerfacecolor='none', markeredgecolor='red',label=r'V($\alpha$,0)-V(Host)')
         plt.annotate(s='', xy=(Rwl,value_sample), xytext=(Rws,value_sample), arrowprops=dict(arrowstyle='<->',color = 'orange',lw = 2.0))
@@ -82,6 +91,8 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
         plt.savefig(filename,dpi=600)
         plt.show(block=False)
         return  pa_atom
+    
+    
     if model == True: 
         Diff = aims_atom_pots[:,1] - model_pots[:,1]
         Dim = len(Diff)
@@ -106,12 +117,23 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
         Ymax = y_max + 0.2*(y_max-y_min)    
         mean = (Ymin+Ymax)/2.0
 
-        plt.ylim((Ymin,Ymax))
-    
+        # Options for user to override plot settings
+        if user_ymin:
+            Ymin = user_ymin
+        if user_ymax:
+            Ymax = user_ymax
+        if user_title:
+            title = user_title
+        if user_xlabel:
+            plt.xlabel(user_xlabel,fontsize=15,fontname = "Times New Roman")
+        if user_ylabel:
+            plt.ylabel(user_ylabel,fontsize=15,fontname = "Times New Roman")
+
+        plt.ylim((Ymin,Ymax))    
         plt.axvline(x=Rws,linestyle='--',color='orange',lw =2.0) 
         plt.text(Rws,mean,r'$R_{ws}$',color='orange',fontsize=15,fontname = "Times New Roman")
-    
-        plt.title(title,fontsize=15,fontname = "Times New Roman")
+        #plt.title(title,fontsize=15,fontname = "Times New Roman")
+        plt.title('test 2',fontsize=15,fontname = "Times New Roman")
     
         #plt.plot(X1,Y1,'or',label='V(Defect,q)-V(Defect,0)')
         plt.plot(aims_atom_pots[:,0],aims_atom_pots[:,1],'o',ms=5,markerfacecolor='none', markeredgecolor='red',label=r'V($\alpha$,q)-V(Host)')
@@ -123,10 +145,11 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
     
         plt.legend()
         plt.savefig(filename,dpi=600)
+        
         return pa_atom  
 
 
-def plot_planer_average_alignment(lattice_constant_z,Defect_pos,charge,X,aims_pots,model_pots,model,func,filename):
+def plot_planar_average_alignment(lattice_constant_z,Defect_pos,charge,X,aims_pots,model_pots,model,func,filename, user_ymin = None, user_ymax = None, user_xlabel = None, user_ylabel = None, user_title = None):
     # begin ploting planer_average_alignment  
     # find the postion which is most far away from the defect position.
     xmin = Defect_pos -0.5*lattice_constant_z
@@ -159,6 +182,11 @@ def plot_planer_average_alignment(lattice_constant_z,Defect_pos,charge,X,aims_po
     y_min = ymin - 0.3*(ymax-ymin)
     y_max = ymax + 0.3*(ymax-ymin)
 
+    if user_ymin:
+        y_min = user_ymin
+    if user_ymax:
+        y_max = user_ymax
+
     #Generating the Plots    
     plt.clf()
     matplotlib.rc('font',family='Times New Roman')
@@ -167,6 +195,10 @@ def plot_planer_average_alignment(lattice_constant_z,Defect_pos,charge,X,aims_po
     plt.ylim((y_min,y_max)) 
     plt.xlabel(r'Z-coordinates ($\AA$)',fontsize=15,fontname = "Times New Roman")
     plt.ylabel('Potential (V)',fontsize=15,fontname = "Times New Roman")
+    if user_xlabel:
+        plt.xlabel(user_xlabel,fontsize=15,fontname = "Times New Roman")
+    if user_ylabel:
+        plt.ylabel(user_ylabel,fontsize=15,fontname = "Times New Roman")
 
     
     if model == False :  
@@ -177,6 +209,9 @@ def plot_planer_average_alignment(lattice_constant_z,Defect_pos,charge,X,aims_po
         #print (value)
         title = r'$-q(V(\alpha,0)-V(Host))|_{far}$ = '+str(value) + ' eV'
  
+        if user_title:
+            title = user_title
+
         plt.title(title,fontsize=15,fontname = "Times New Roman")
     
         plt.axhline(y=aims_pots[idx], xmin=0, xmax=lattice_constant_z,linestyle = '--', lw=2,color='orange')
@@ -243,6 +278,9 @@ def plot_planer_average_alignment(lattice_constant_z,Defect_pos,charge,X,aims_po
         Diff = Diff[sorter_save]
         X_shift = np.sort(X_shift)
         
+        if user_title:
+            title = user_title
+
         plt.title(title,fontsize=15,fontname = "Times New Roman")
         
         plt.plot(X_shift,aims_pots,'or',label=label1)
