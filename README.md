@@ -38,7 +38,7 @@ Alternatively, a conda environment can be created for this workflow and the nece
 
 `conda activate YourChosenEnvName`
 
-`conda install -c suzannekwallace -c conda-forge coffee_poisson_solver_ko pylada notebookscripter jupyter pytest pytest-cov coveralls`
+`conda install -c conda-forge -c suzannekwallace -c breathe coffee_poisson_solver_ko pylada notebookscripter jupyter pytest pytest-cov coveralls`
 
 
 ## Project components
