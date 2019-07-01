@@ -32,7 +32,7 @@ def read_file(Filename):
 
 def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,model,filename, user_ymin = None, user_ymax = None, user_xlabel = None, user_ylabel = None, user_title = None): 
     volume = np.dot(lattice[0,:],np.cross(lattice[1,:],lattice[2,:]))
-    #define the parameters corresponding to the Wigner-Seize Cells.   
+    # Define the parameters corresponding to the Wigner-Seize Cells.   
     Rws = (volume*3.0/(4.0*np.pi))**(1.0/3.0)
     temp_a = (lattice[0][0]+lattice[1][0]+lattice[2][0])**2
     temp_b = (lattice[0][1]+lattice[1][1]+lattice[2][1])**2
