@@ -81,8 +81,7 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
         plt.axvline(x=Rws,linestyle='--',color='orange',lw =2.0) 
         plt.text(Rws,mean,r'$R_{ws}$',color='orange',fontsize=15,fontname = "Times New Roman")
     
-        #plt.title(title,fontsize=15,fontname = "Times New Roman")
-        plt.title('test',fontsize=15,fontname = "Times New Roman")
+        plt.title(title,fontsize=15,fontname = "Times New Roman")
     
         plt.plot(aims_atom_pots[:,0],aims_atom_pots[:,1],'o',ms=5,markerfacecolor='none', markeredgecolor='red',label=r'V($\alpha$,0)-V(Host)')
         plt.annotate(s='', xy=(Rwl,value_sample), xytext=(Rws,value_sample), arrowprops=dict(arrowstyle='<->',color = 'orange',lw = 2.0))
