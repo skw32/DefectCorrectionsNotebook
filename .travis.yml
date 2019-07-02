@@ -12,6 +12,8 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
 script:
+  - conda create -n CI_env python=3.6
+  - conda activate CI_env
   - conda install -c conda-forge -c suzannekwallace -c breathe coffee_poisson_solver_ko pylada notebookscripter jupyter pytest pytest-cov coveralls
 after_success:
   - coveralls

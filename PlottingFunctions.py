@@ -72,9 +72,9 @@ def plot_atom_average_alignment(lattice,defect_charge,aims_atom_pots,model_pots,
         if user_title:
             title = user_title
         if user_xlabel:
-            plt.xlabel(user_xlabel,fontsize=14,fontname = "Times New Roman")
+            plt.xlabel(user_xlabel,fontsize=15,fontname = "Times New Roman")
         if user_ylabel:
-            plt.ylabel(user_ylabel,fontsize=14,fontname = "Times New Roman")
+            plt.ylabel(user_ylabel,fontsize=15,fontname = "Times New Roman")
         
         
         #Ploting the alignment plot       
