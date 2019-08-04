@@ -50,9 +50,9 @@ There are other existing workflows developed for performing finite-size correcti
 
 
 # Defect processing example
-The example below shows a visualisation generated with the VESTA software package [@Momma2011] for a supercell of ??? containing a ??? point defect (a) along with selected outputs from the notebook workflow, including plots of the defect coordinates located by the workflow (b) and potential alignment plots generated using averaged atom-site potentials (c) and planar averages of the potential (d).
+The example below shows a visualisation generated with the VESTA software package [@Momma2011] for a supercell of diamond containing a carbon vacancy point defect (a) along with selected outputs from the notebook workflow, including plot of the defect coordinates located by the workflow (b) and potential alignment plots generated using averaged atom-site potentials and the LZ scheme (c) and planar averages of the potential with the FNV scheme (d).
 
-**Show vesta visual of defect supercell (a), defect supercell location plot from notebook (b) and KO (c) and planar av potential alignment (d) plots**
+![][sampleOutput.png]
 
 # Acknowledgements
 Add mine and Tong's PhD funding info??
