@@ -47,6 +47,6 @@ The example below shows a visualisation generated with the VESTA software packag
 ![](sampleOutputs.png)
 
 # Acknowledgements
-Add mine and Tong's PhD funding info??
+This project was carried out during PhD research supported by the EPSRC grant no. EP/L016354/1 and EP/K016288/1 (SKW) and the National Science Foundation under Grant No. 1511737 (TZ). This project benefitted greatly from helpful discussions provided by Stephan Lany, Anuj Goyal, Prashun Gorai and Vladan Stevanovic on methods for the simulation of charged defects, by Volker Blum for guidance on the development of new routines for FHI-aims to generate the data required to perform the correction schemes and Nathaniel Cohen for guidance with the use of the NotebookScripter python library to facilitate further automation of the data processing. This package also makes use of the pylada-defects [@Goyal2017] and CoFFEE [@Naik2018] software packages to implement different defect correction schemes. Sample data for the project was computed using ARCHER, the UK's national high-performance computing service, which is funded by the Office of Science and Technology through EPSRC's High End Computing Programme (Grant no. EP/L000202).
 
 # References
