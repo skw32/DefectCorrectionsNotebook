@@ -3,6 +3,24 @@ import LogFileSetup as lfs
 import pytest
 import numpy as np
 
+# Functions created specifically for running test cases
+def group_species_with_count(species_list, host_counts, defect_counts):
+    '''Function to avoid false negatives with test_count_species, when order of species read in is different,
+    but species type and corresponding count are correct. 
+    
+    Args: (outputs from dsa.read_atom_coords)
+    - species_list (list of str): chemical symbol of elements in supercell
+    - host_counts (list of int): number of each species type in perfect host supercell
+    - defect_counts (list of int): number of each species (same order as above) but in defective supercell
+
+    Returns: Set of tuples, where each tuple is species, host_count, defect_count. Set is chosen so that order is not
+    important when comparing between supercell, but species, host_count and defect_count order is respected.
+    '''
+    species_countHostDefect = set() # Create set so that order is not important for later comparisons
+    for species, host_count, defect_count in zip(species_list, host_counts, defect_counts):
+        species_countHostDefect.add((species, host_count, defect_count))
+    return species_countHostDefect
+
 # Test log file function call
 def test_log_file_config():
     lfs.configure_logging("log_test")
@@ -47,8 +65,10 @@ def test_count_species():
     host_coords = dsa.read_atom_coords("tests/TestData/perfect/geometry.in")
     defect_coords = dsa.read_atom_coords("tests/TestData/vacancy/geometry.in")
     test_count = dsa.count_species(host_coords, defect_coords)
-    verfied_count = ['S', 'Cu', 'As'], [64, 48, 16], [63, 48, 16]
-    assert verfied_count == test_count
+    test_grouped = group_species_with_count(test_count[0], test_count[1], test_count[2])
+    verified_count = ['S', 'Cu', 'As'], [64, 48, 16], [63, 48, 16]
+    verified_grouped = group_species_with_count(verified_count[0], verified_count[1], verified_count[2])
+    assert verified_grouped == test_grouped
 def test_find_defect_type():
     host_coords = dsa.read_atom_coords("tests/TestData/perfect/geometry.in")
     vacancy_coords = dsa.read_atom_coords("tests/TestData/vacancy/geometry.in")
